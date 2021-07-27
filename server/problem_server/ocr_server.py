@@ -17,9 +17,9 @@ model_name = '1627062415'
 
 class_names = ['drawing', 'paper', 'problem']
 
-model_path = 'C:/Users/jun09/OneDrive/Desktop/s-class_system_version/s-class_version-2/server/problem_server/model/cnn_model/' + model_name
+model_path = 'C:/Users/jun09/OneDrive/Desktop/s-class_system_version/s-class_version-3/server/problem_server/model/cnn_model/' + model_name
 
-image_path = 'C:/Users/jun09/OneDrive/desktop/s-class_system_version/s-class_version-2/server/problem_server/test_image/' + image_name
+image_path = 'C:/Users/jun09/OneDrive/desktop/s-class_system_version/s-class_version-3/server/problem_server/test_image/' + image_name
 
 def load_model():
     return tf.keras.models.load_model(model_path)
