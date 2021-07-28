@@ -69,6 +69,12 @@ $(function() {
                 localStorage.removeItem('videoSource');
                 localStorage.removeItem('audioSource');
                 localStorage.removeItem('audioOutPutSinkid');
+
+                Swal.fire(
+                    '강의실 연결성공',
+                    `참가자로 강의실에 연결되었습니다. 이 메시지는 닫으셔도 됩니다.`,
+                    'success'
+                )
             });
             
             socket.emit('joined_class', roomId, user);
