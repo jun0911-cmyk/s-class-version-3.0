@@ -61,8 +61,15 @@ $(function() {
             // MediaStream connect
             muteAudio.addEventListener('click', audios);
             muteVideo.addEventListener('click', videos);
-            attendance.addEventListener('click', attendanceCheck);
+            attendance.addEventListener('click', start_attendanceCheck);
             problem_book.addEventListener('click', problem_page);
+
+            function start_attendanceCheck() {
+                socket.emit('check_student', roomId, user);
+                socket.on('check_student', function(roomId, user, check_student) {
+                    attendanceCheck(socket, roomId, user, check_student);
+                });
+            }
         
             function audios() {
                 mute_audio(localVideo, localStream);
