@@ -132,6 +132,32 @@ module.exports = function(app, io) {
             });
         });
 
+        // 교사 DB에 학생 이름 추가
+        socket.on('AddTeacherInvite', function(classname, user) {
+            models.teacher.findOne({
+                where: {
+                    email: classname
+                }
+            }).then(function(teacher) {
+                if (teacher.access_student == 'not student') {
+                    models.teacher.update({
+                        access_student: user.email
+                    }, {
+                        where: {
+                            email: classname
+                        }
+                    })
+                    .catch(err => console.log(err));
+                    return;
+                }
+
+                if (teacher.access_student != 'not student') {
+                    models.sequelize.query(`UPDATE teacher_dbs SET access_student = CONCAT(access_student, ', ${user.email}') WHERE email = '${classname}'`, { type: QueryTypes.UPDATE })
+                    .catch(err => console.log(err));
+                }
+            })
+        });
+
         // 학생 DB에 담당 교사 이름 추가
         socket.on('AddInvite', function(classname, user) {
             if (user.select_teacher == 'not teacher') {
@@ -142,7 +168,7 @@ module.exports = function(app, io) {
                         email: user.email
                     }
                 }).then(function(result) {
-                    socket.emit('successInvite', result)
+                    socket.emit('successInvite', result);
                 })
                 .catch(err => console.log(err));
                 return;
@@ -227,6 +253,36 @@ module.exports = function(app, io) {
                     }
                 }
             }
+        });
+
+        // 강사리스트에서 해당 학생 제거
+        socket.on('delect_student', function(delectUser, user) {
+            models.teacher.findOne({
+                email: delectUser
+            }).then(function(teacher_result) {
+                const teacher_array = teacher_result.access_student.split(", ");
+                if (teacher_array.length == 1) {
+                    models.teacher.update({
+                        access_student: 'not student'
+                    }, {
+                        where: {
+                            email: delectUser
+                        }
+                    });
+                } else if (teacher_array.length != 1) {
+                    for (j = 0; j < teacher_array.length; j++) {
+                        if (teacher_array[j] != user.email) {
+                            models.teacher.update({
+                                access_student: teacher_array[j]
+                            }, {
+                                where: {
+                                    email: delectUser
+                                }
+                            });
+                        }
+                    }
+                }
+            });
         });
 
         // 온라인 강의 목록 추가
@@ -422,6 +478,42 @@ module.exports = function(app, io) {
                     clients = io.sockets.adapter.rooms.get(roomId).size;
                 }
             }
+        });
+
+        // 데이터베이스 제한 인원 확인
+        socket.on('check_student', function(roomId, user) {
+            models.class.findOne({
+                where: {
+                    class_id: roomId
+                }
+            }).then(function(class_data) {
+                socket.emit('check_student', roomId, user, class_data.limit_join);
+            })
+        });
+
+        // 전자출석부
+        socket.on('attendanceCheck', function(roomId, user) {
+            models.teacher.findOne({
+                where: {
+                    email: user.email
+                }
+            }).then(function(teacher) {
+                const array = teacher.access_student.split(", ");
+                for (var i = 0; i < array.length; i++) {
+                    if (client.length == 0) {
+                        socket.emit('null_student', roomId, user);
+                        return;
+                    } else {
+                        for (var j = 0; j < client.length; j++) {
+                            if (client[j].connect_room == roomId) {
+                                if (client[j].client_name != array[i]) {
+                                    socket.emit('attendanceCheck',roomId, user, array[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         });
 
         socket.on('disconnect', function() {
