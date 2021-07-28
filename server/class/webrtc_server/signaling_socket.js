@@ -427,8 +427,6 @@ module.exports = function(app, io) {
         socket.on('disconnect', function() {
         });
 
-        // 강의실 종료와 나가기는 통신 피어 구분자와 아이디로 파악하여 종료해야 하고 일일히 트랙을 멈춰야 한다, 아직까지 1:1에서만 최적화 되어있기에 3명이상 접속하면 작동이 되지 않는다. 따라서 피어구분자와 1:N이 최적화 되는 즉시 다시 머지 할것이다.
-
         // CLOSE CLASS 강의실 종료
         socket.on('close_class', function(roomId) {
             io.to(roomId).emit('close_class', roomId);
