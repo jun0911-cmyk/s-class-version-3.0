@@ -1,7 +1,5 @@
 'use strict';
 
-import {sendMessage, onMessage, ScreenSendMessage, ScreenOnMessage} from "../webrtc_protocol/signaling_client.js";
-
 const socket = window.io();
 const videoElement = document.querySelector('video#localVideo');
 const videoSelect = document.querySelector('select#videoSource');
@@ -49,13 +47,13 @@ function updateDevicesList() {
             const option = document.createElement('option');
             option.value = deviceInfo.deviceId;
             if (deviceInfo.kind === 'audioinput') {
-                option.text = deviceInfo.label || `마이크 장치 검색중`;
+                option.text = deviceInfo.label || `마이크 장치 검색중...`;
                 audioInputSelect.appendChild(option);
             } else if (deviceInfo.kind === 'audiooutput') {
-                option.text = deviceInfo.label || `스피커 장치 검색중`;
+                option.text = deviceInfo.label || `스피커 장치 검색중...`;
                 audioOutputSelect.appendChild(option);
             } else if (deviceInfo.kind === 'videoinput') {
-                option.text = deviceInfo.label || `비디오 장치 검색중`;
+                option.text = deviceInfo.label || `비디오 장치 검색중...`;
                 videoSelect.appendChild(option);
             } else {
                 console.log('Some other kind of source/device: ', deviceInfo);
