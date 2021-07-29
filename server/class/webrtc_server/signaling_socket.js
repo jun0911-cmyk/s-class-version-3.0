@@ -427,19 +427,21 @@ module.exports = function(app, io) {
 
         // JOIN CLASS
         socket.on('join_class', function(roomId, email, user) {
-            for (var i = 0; i < host.length; i++) {
-                if (host[i].id == roomId) {
-                    models.class.findOne({
-                        where: {
-                            class_id: host[i].id
-                        }
-                    }).then(function(room) {
-                        if (room.class_status == 1 && email == user.email) {
-                            socket.emit('joined', roomId, clients);
-                        }
-                    });
+            models.teacher.findOne({
+                where: {
+                    user_id: roomId
                 }
-            }
+            }).then(function(teacher) {
+                models.class.findOne({
+                    where: {
+                        class_id: teacher.user_id
+                    }
+                }).then(function(room) {
+                    if (room.class_status == 1 && email == user.email) {
+                        socket.emit('joined', roomId, clients);
+                    }
+                });
+            });
         });
 
         socket.on('join_fail', function(roomId, email, user) {
@@ -497,7 +499,7 @@ module.exports = function(app, io) {
                 where: {
                     email: user.email
                 }
-            }).then(function(teacher) {
+            }).then(async function(teacher) {
                 const array = teacher.access_student.split(", ");
                 for (var i = 0; i < array.length; i++) {
                     if (client.length == 0) {
@@ -507,7 +509,8 @@ module.exports = function(app, io) {
                         for (var j = 0; j < client.length; j++) {
                             if (client[j].connect_room == roomId) {
                                 if (client[j].client_name != array[i]) {
-                                    socket.emit('attendanceCheck',roomId, user, array[i]);
+                                    await socket.emit('push_attendanceCheck', array[i]);
+                                    socket.emit('attendanceCheck', roomId, user);
                                 }
                             }
                         }

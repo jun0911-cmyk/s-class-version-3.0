@@ -1,4 +1,6 @@
 export function attendanceCheck(socket, roomId, user, check_student) {
+    var student_array = [];
+
     Swal.fire({
         icon: 'info',
         title: `전자출석부`,
@@ -10,21 +12,8 @@ export function attendanceCheck(socket, roomId, user, check_student) {
         cancelButtonText: '취소'
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire(
-                '중요사항',
-                `전자출석부 실행후 아무런 메시지가 뜨지 않는다면 모든 학생이 강의실에 전부 참가한것입니다. 또한 모든 변경사항은 전자출석부에서 확인이 가능합니다.`,
-                'info'
-            );
             socket.emit('attendanceCheck', roomId, user);
         }
-    });
-
-    socket.on('attendanceCheck', function(roomId, user, attendanceCheck_student) {
-        Swal.fire(
-            '전자출석부',
-            `${roomId}번 강의실에 참가하지 않은 학생이름 : ${attendanceCheck_student} 해당기록은 전자출석부로 이동됩니다.`,
-            'info'
-        );
     });
 
     socket.on('null_student', function(roomId, user) {
@@ -32,6 +21,18 @@ export function attendanceCheck(socket, roomId, user, check_student) {
             '전자출석부 오류',
             `현재 모든 세션에 참가자가 없습니다.`,
             'error'
+        );
+    });
+
+    socket.on('push_attendanceCheck', function(attendanceCheck_student) {
+        student_array.push(attendanceCheck_student);
+    });
+
+    socket.on('attendanceCheck', function(roomId, user) {
+        Swal.fire(
+            '전자출석부',
+            `현재 수업에 참가하지 않은 학생 이름 : ${student_array} 해당 학생은 전자출석부로 이동됩니다.`,
+            'success'
         );
     });
 }

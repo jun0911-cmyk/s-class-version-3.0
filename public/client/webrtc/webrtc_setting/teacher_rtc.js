@@ -54,7 +54,7 @@ $(function() {
             var audioSource = localStorage.getItem('audioSource');
             var audioOutPutSinkid = localStorage.getItem('audioOutPutSinkid');
 
-            WaitingRoom(socket);
+            WaitingRoom(socket, roomId);
 
             $('#localScreenVideo').hide();
 
