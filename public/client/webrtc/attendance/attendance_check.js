@@ -1,5 +1,5 @@
 export function attendanceCheck(socket, roomId, user, check_student) {
-    var student_array = [];
+    var client_array = [];
 
     Swal.fire({
         icon: 'info',
@@ -16,15 +16,25 @@ export function attendanceCheck(socket, roomId, user, check_student) {
         }
     });
 
-    socket.on('push_attendanceCheck', function(attendanceCheck_student) {
-        student_array.push(attendanceCheck_student);
-    });
-
-    socket.on('attendanceCheck', function(roomId, user) {
-        Swal.fire(
-            '전자출석부',
-            `현재 수업에 참가하지 않은 학생 이름 : ${student_array} 해당 학생은 전자출석부로 이동됩니다.`,
-            'success'
-        );
+    socket.on('attendanceCheck', function(roomId, user, student_array, client) {
+        for (var i = 0; i < client.length; i++) {
+            if (client[i].connect_room == roomId) {
+                client_array.push(client[i].client_name); 
+            }  
+        }
+        var attendanceCheck_array = student_array.filter(x => !client_array.includes(x));
+        if (attendanceCheck_array.length == 0) {
+            Swal.fire(
+                '전자출석부 조회결과',
+                `수업 미출석 : 0명, 수업 출석 : ${client_array.length}명 모든 학생이 출석하였습니다`,
+                'success'
+            )
+        } else if (attendanceCheck_array.length != 0) {
+            Swal.fire(
+                '전자출석부 조회결과',
+                `수업 미출석 : ${attendanceCheck_array.length}명, 수업 출석 : ${client_array.length}명, 현재 출석하지 않은 학생이름 : ${attendanceCheck_array}`,
+                'info'
+            )
+        }
     });
 }

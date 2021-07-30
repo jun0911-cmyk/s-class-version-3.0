@@ -54,7 +54,6 @@ $(function() {
             var audioSource = localStorage.getItem('audioSource');
             var audioOutPutSinkid = localStorage.getItem('audioOutPutSinkid');
             var attendanceCheck_array = [];
-            var student;
 
             WaitingRoom(socket, roomId);
 
@@ -67,30 +66,29 @@ $(function() {
             problem_book.addEventListener('click', problem_page);
 
             function start_attendanceCheck() {
-                socket.emit('check_student', roomId, user);
-                socket.on('check_student', function(student_data) {
-                    student = student_data;
-                    socket.emit('check_attendanceCheck', roomId, user);
-                });
+                socket.emit('check_attendanceCheck', roomId, user);
                 socket.on('null_student', function() {
                     Swal.fire(
                         '전자출석부 오류',
-                        `현재 모든 세션에 참가자가 없습니다.`,
+                        '현재 모든 강의실에 학생들이 없습니다.',
                         'error'
                     );
                 });
-                socket.on('null_room_class', function(roomId, user) {
-                    Swal.fire(
-                        '전자출석부 오류',
-                        `현재 ${roomId}번 강의실에는 전자출석부를 확인할 인원이 없습니다.`,
-                        'error'
-                    );
-                });
-                socket.on('check_push_attendanceCheck', function(attendanceCheck_student) {
-                    attendanceCheck_array.push(attendanceCheck_student);
-                });
-                socket.on('ready_attendanceCheck', function(roomId, user) {
-                    attendanceCheck(socket, roomId, user, student);
+                socket.on('ready_attendanceCheck', function(roomId, user, client, student) {
+                    for (var i = 0; i < client.length; i++) {
+                        if (client[i].connect_room == roomId) {
+                            attendanceCheck_array.push(client[i].client_name);
+                        }
+                    }
+                    if (attendanceCheck_array.length == 0) {
+                        Swal.fire(
+                            '전자출석부 오류',
+                            `현재 ${roomId}번 강의실에 참가한 학생들이 없습니다.`,
+                            'error'
+                        );
+                    } else if (attendanceCheck_array.length != 0) {
+                        attendanceCheck(socket, roomId, user, student);
+                    }
                 });
             }
         

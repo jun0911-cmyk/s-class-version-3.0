@@ -482,32 +482,19 @@ module.exports = function(app, io) {
             }
         });
 
-        // 데이터베이스 제한 인원 확인
-        socket.on('check_student', function(roomId, user) {
-            models.class.findOne({
-                where: {
-                    class_id: roomId
-                }
-            }).then(function(class_data) {
-                socket.emit('check_student', roomId, user, class_data.limit_join);
-            })
-        });
-
         // 전자출석부 확인
-        socket.on('check_attendanceCheck', async function(roomId, user) {
+        socket.on('check_attendanceCheck', function(roomId, user) {
             if (client.length == 0) {
                 socket.emit('null_student');
                 return;
             } else {
-                for (var i = 0; i < client.length; i++) {
-                    if (client[i].connect_room == roomId) {
-                        await socket.emit('check_push_attendanceCheck', client[i]);
-                        socket.emit('ready_attendanceCheck', roomId, user);
+                models.class.findOne({
+                    where: {
+                        class_id: roomId
                     }
-                    if (client[i].connect_room != roomId) {
-                        socket.emit('null_room_class', roomId, user);
-                    }
-                }
+                }).then(function(class_data) {
+                    socket.emit('ready_attendanceCheck', roomId, user, client, class_data.limit_join);
+                });
             }
         });
 
@@ -519,16 +506,7 @@ module.exports = function(app, io) {
                 }
             }).then(async function(teacher) {
                 const array = teacher.access_student.split(", ");
-                for (var i = 0; i < array.length; i++) {
-                    for (var j = 0; j < client.length; j++) {
-                        if (client[j].connect_room == roomId) {
-                            if (client[j].client_name != array[i]) {
-                                await socket.emit('push_attendanceCheck', array[i]);
-                                socket.emit('attendanceCheck', roomId, user);
-                            }
-                        }
-                    }
-                }
+                socket.emit('attendanceCheck', roomId, user, array, client);
             });
         });
 
