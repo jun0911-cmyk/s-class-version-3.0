@@ -500,9 +500,12 @@ module.exports = function(app, io) {
                 return;
             } else {
                 for (var i = 0; i < client.length; i++) {
-                    if  (client[i].connect_room == roomId) {
+                    if (client[i].connect_room == roomId) {
                         await socket.emit('check_push_attendanceCheck', client[i]);
                         socket.emit('ready_attendanceCheck', roomId, user);
+                    }
+                    if (client[i].connect_room != roomId) {
+                        socket.emit('null_room_class', roomId, user);
                     }
                 }
             }

@@ -79,20 +79,18 @@ $(function() {
                         'error'
                     );
                 });
+                socket.on('null_room_class', function(roomId, user) {
+                    Swal.fire(
+                        '전자출석부 오류',
+                        `현재 ${roomId}번 강의실에는 전자출석부를 확인할 인원이 없습니다.`,
+                        'error'
+                    );
+                });
                 socket.on('check_push_attendanceCheck', function(attendanceCheck_student) {
                     attendanceCheck_array.push(attendanceCheck_student);
                 });
                 socket.on('ready_attendanceCheck', function(roomId, user) {
-                    if (attendanceCheck_array.length == 0) {
-                        Swal.fire(
-                            '전자출석부 오류',
-                            `현재 ${roomId}번 강의실에는 전자출석부를 확인할 인원이 없습니다.`,
-                            'error'
-                        );
-                        return;
-                    } else {
-                        attendanceCheck(socket, roomId, user, student);
-                    }
+                    attendanceCheck(socket, roomId, user, student);
                 });
             }
         
