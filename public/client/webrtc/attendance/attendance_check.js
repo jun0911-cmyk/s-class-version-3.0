@@ -16,14 +16,6 @@ export function attendanceCheck(socket, roomId, user, check_student) {
         }
     });
 
-    socket.on('null_student', function(roomId, user) {
-        Swal.fire(
-            '전자출석부 오류',
-            `현재 모든 세션에 참가자가 없습니다.`,
-            'error'
-        );
-    });
-
     socket.on('push_attendanceCheck', function(attendanceCheck_student) {
         student_array.push(attendanceCheck_student);
     });

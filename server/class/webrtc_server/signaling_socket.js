@@ -493,6 +493,21 @@ module.exports = function(app, io) {
             })
         });
 
+        // 전자출석부 확인
+        socket.on('check_attendanceCheck', async function(roomId, user) {
+            if (client.length == 0) {
+                socket.emit('null_student');
+                return;
+            } else {
+                for (var i = 0; i < client.length; i++) {
+                    if  (client[i].connect_room == roomId) {
+                        await socket.emit('check_push_attendanceCheck', client[i]);
+                        socket.emit('ready_attendanceCheck', roomId, user);
+                    }
+                }
+            }
+        });
+
         // 전자출석부
         socket.on('attendanceCheck', function(roomId, user) {
             models.teacher.findOne({
@@ -502,16 +517,11 @@ module.exports = function(app, io) {
             }).then(async function(teacher) {
                 const array = teacher.access_student.split(", ");
                 for (var i = 0; i < array.length; i++) {
-                    if (client.length == 0) {
-                        socket.emit('null_student', roomId, user);
-                        return;
-                    } else {
-                        for (var j = 0; j < client.length; j++) {
-                            if (client[j].connect_room == roomId) {
-                                if (client[j].client_name != array[i]) {
-                                    await socket.emit('push_attendanceCheck', array[i]);
-                                    socket.emit('attendanceCheck', roomId, user);
-                                }
+                    for (var j = 0; j < client.length; j++) {
+                        if (client[j].connect_room == roomId) {
+                            if (client[j].client_name != array[i]) {
+                                await socket.emit('push_attendanceCheck', array[i]);
+                                socket.emit('attendanceCheck', roomId, user);
                             }
                         }
                     }

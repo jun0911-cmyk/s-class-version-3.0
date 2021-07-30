@@ -53,6 +53,8 @@ $(function() {
             var videoSource = localStorage.getItem('videoSource');
             var audioSource = localStorage.getItem('audioSource');
             var audioOutPutSinkid = localStorage.getItem('audioOutPutSinkid');
+            var attendanceCheck_array = [];
+            var student;
 
             WaitingRoom(socket, roomId);
 
@@ -66,8 +68,31 @@ $(function() {
 
             function start_attendanceCheck() {
                 socket.emit('check_student', roomId, user);
-                socket.on('check_student', function(roomId, user, check_student) {
-                    attendanceCheck(socket, roomId, user, check_student);
+                socket.on('check_student', function(student_data) {
+                    student = student_data;
+                    socket.emit('check_attendanceCheck', roomId, user);
+                });
+                socket.on('null_student', function() {
+                    Swal.fire(
+                        '전자출석부 오류',
+                        `현재 모든 세션에 참가자가 없습니다.`,
+                        'error'
+                    );
+                });
+                socket.on('check_push_attendanceCheck', function(attendanceCheck_student) {
+                    attendanceCheck_array.push(attendanceCheck_student);
+                });
+                socket.on('ready_attendanceCheck', function(roomId, user) {
+                    if (attendanceCheck_array.length == 0) {
+                        Swal.fire(
+                            '전자출석부 오류',
+                            `현재 ${roomId}번 강의실에는 전자출석부를 확인할 인원이 없습니다.`,
+                            'error'
+                        );
+                        return;
+                    } else {
+                        attendanceCheck(socket, roomId, user, student);
+                    }
                 });
             }
         
