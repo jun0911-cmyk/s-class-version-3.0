@@ -6,7 +6,6 @@ const { QueryTypes } = require('sequelize');
 const io = require('socket.io')(server);
 
 var clients;
-var numClients;
 
 var host = [];
 var host_data;
