@@ -133,7 +133,7 @@ module.exports = function(app, io) {
                     if (check_array.length == 0) {
                         socket.emit('success_code', InviteCode, result);
                     } else if (check_array.length != 0) {
-                        socket.emit('userOverlap', result.email);
+                        socket.emit('userOverlap', result.user_id);
                     }
                 }
             });
