@@ -13,7 +13,7 @@ export async function invite_code(socket, user) {
             'info'
         ).then((result) => {
             if (result.isConfirmed) {
-                socket.emit('checkInviteCode', InviteCode);
+                socket.emit('checkInviteCode', InviteCode, user);
             }
         });
     }

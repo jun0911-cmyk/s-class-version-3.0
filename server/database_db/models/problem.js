@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        commentary: {
+            type: DataTypes.INTEGER
+        },
         questioner: {
             type: DataTypes.STRING,
             allowNull: false,

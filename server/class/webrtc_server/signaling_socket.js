@@ -114,7 +114,7 @@ module.exports = function(app, io) {
         });
 
         // 초대코드 체크
-        socket.on('checkInviteCode', function(InviteCode) {
+        socket.on('checkInviteCode', function(InviteCode, user) {
             models.teacher.findOne({
                 where: {
                     invite_code: InviteCode
@@ -123,10 +123,17 @@ module.exports = function(app, io) {
                 if (result == null) {
                     socket.emit('fail_code', InviteCode);
                 } else {
-                    if (result.invite_code == InviteCode) {
+                    const array = user.select_teacher.split(", ");
+                    var check_array = [];
+                    for(var i = 0; i < array.length; i++) {
+                        if (array[i] == result.email) {
+                            check_array.push(array[i]);
+                        }
+                    }
+                    if (check_array.length == 0) {
                         socket.emit('success_code', InviteCode, result);
-                    } else {
-                        socket.emit('fail_code', InviteCode);
+                    } else if (check_array.length != 0) {
+                        socket.emit('userOverlap', result.email);
                     }
                 }
             });

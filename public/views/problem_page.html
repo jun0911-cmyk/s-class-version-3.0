@@ -45,8 +45,15 @@
         <input type="text" id="search" class="search" placeholder="카테고리 또는 문제 검색" size="40">
         <button class="search_button"><i class="fas fa-search" style="font-size: 23px;"></i></button>
     </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="margin-left: -1%;">
+        <label class="form-check-label" for="flexSwitchCheckDefault">문제 정답이 등록된 문제만 보기</label>
+    </div>
     <div class="search_message">
         <h3 class="main_problem_message">강사 추천 카테고리 문제</h3>
+    </div>
+    <div class="btn">
+        <button type="button" class="btn btn-info">문제등록(교사권한)</button>
     </div>
     <div class="contention">
         <div class="main_content" id="main_content">
@@ -62,6 +69,7 @@
                     <th scope="cols">해당 과목</th>
                     <th scope="cols">카테고리분류</th>
                     <th scope="cols">학급 분류</th>
+                    <th scope="cols">해설 등록여부</th>
                     <th scope="cols">자세히 보기</th>
                 </tr>
             </thead>
@@ -74,7 +82,7 @@
                         <span>{{ index.problem_name }}</span>
                     </td>
                     <td>
-                        <span>{{ index.problem_lavel }}</span>
+                        <span>{{ index.problem_lavel }}단계</span>
                     </td>
                     <td>
                         <span>{{ index.problem_subject }}</span>
@@ -84,6 +92,9 @@
                     </td>
                     <td>
                         <span>{{ index.school_lavel }}</span>
+                    </td>
+                    <td>
+                        <span>{{ index.commentary }}</span>
                     </td>
                     <td>
                         <button class="btn btn-primary btn-sm" id="details_btn">자세히 보기</button>
