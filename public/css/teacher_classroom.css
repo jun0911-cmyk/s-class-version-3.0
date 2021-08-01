@@ -212,9 +212,41 @@
     select:focus {outline: none;}
     input:focus {outline:none;}
 
+    .seat {
+        margin-left: 22%;
+        width: 35%;
+        height: 50%;
+        background-color: rgb(31, 28, 28);
+        margin-top: 4.8%;
+        border-radius: 5px;
+    }
+
+    .seat_text {
+        color: white;
+        text-align: center;
+        margin-top: 5px;
+        font-weight: 900;
+    }
+
+    .seat_sub_text {
+        color: white;
+        font-weight: 900;
+        font-size: 15px;
+        margin-left: 10px;
+        margin-top: 60%;
+    }
+
+    .seat_color_text {
+        color: white;
+        font-weight: 900;
+        font-size: 15px;
+        margin-left: 58%;
+        margin-top: -4%;
+    }
+
     .audio_video {
         margin-top: -50px;
-        margin-left: 0.02%; /* 집 : 455 노트북 : 263 */
+        margin-left: 0.02%;
         width: 1051px;
         height: 50px;
         background: rgb(31, 28, 28);

@@ -10,6 +10,7 @@ import {WaitingRoom} from "../wait_room/host_waiting_room.js";
 //import {audio_devices_setting} from "../device_setting/select_devices_setting.js";
 import {attendanceCheck} from "../attendance/attendance_check.js";
 import {problem_search} from "../problem_books/select_problem.js";
+import {toggle_seat_ticket} from "../attendance/seat_ticket.js";
 //import {SDPOfferProtoCol, SDPStatusProtoCol} from "../webrtc_protocol/p2p_protocol.js";
 
 const socket = window.io();
@@ -24,6 +25,7 @@ const muteVideo = document.getElementById('videos');
 const screen = document.getElementById('screens');
 const videoSelect = document.getElementById('VideoSelect');
 const problem_book = document.getElementById('levels');
+const seat_ticket = document.getElementById('users');
 const audioOutputSelect = document.getElementById('AudioOutputSelect');
 const audioInputSelect = document.getElementById('AudioInputSelect');
 const selectors = [videoSelect, audioInputSelect, audioOutputSelect];
@@ -64,6 +66,7 @@ $(function() {
             muteVideo.addEventListener('click', videos);
             attendance.addEventListener('click', start_attendanceCheck);
             problem_book.addEventListener('click', problem_page);
+            seat_ticket.addEventListener('click', set_seat_ticket);
 
             function start_attendanceCheck() {
                 socket.emit('check_attendanceCheck', roomId, user);
@@ -90,6 +93,10 @@ $(function() {
                         attendanceCheck(socket, roomId, user, student);
                     }
                 });
+            }
+
+            function set_seat_ticket() {
+                toggle_seat_ticket(socket, roomId, user, seat_ticket);
             }
         
             function audios() {
