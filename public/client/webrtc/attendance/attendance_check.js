@@ -23,18 +23,25 @@ export function attendanceCheck(socket, roomId, user, check_student) {
             }  
         }
         var attendanceCheck_array = student_array.filter(x => !client_array.includes(x));
+        var attendanceCheckData = {
+            "absenteeism": attendanceCheck_array,
+            "attendance": client_array,
+            "all_student": student_array 
+        };
         if (attendanceCheck_array.length == 0) {
             Swal.fire(
                 '전자출석부 조회결과',
                 `수업 미출석 : 0명, 수업 출석 : ${client_array.length}명 모든 학생이 출석하였습니다`,
                 'success'
             );
+            sessionStorage.setItem("attendanceCheckData", JSON.stringify(attendanceCheckData));
         } else if (attendanceCheck_array.length != 0) {
             Swal.fire(
                 '전자출석부 조회결과',
                 `수업 미출석 : ${attendanceCheck_array.length}명, 수업 출석 : ${client_array.length}명, 현재 출석하지 않은 학생이름 : ${attendanceCheck_array}`,
                 'info'
             );
+            sessionStorage.setItem("attendanceCheckData", JSON.stringify(attendanceCheckData));
         }
     });
 }

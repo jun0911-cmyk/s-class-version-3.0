@@ -516,6 +516,12 @@ module.exports = function(app, io) {
             });
         });
 
+        socket.on('attendance_seat_ticket', function(client, attendance, roomId, user) {
+            if (user.user_id == roomId) {
+                socket.emit('attendance_seat_ticket', attendance, client);
+            }
+        });
+
         socket.on('disconnect', function() {
         });
 
