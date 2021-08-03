@@ -17,6 +17,32 @@ export function create_seat_table(roomId, user) {
     });
 }
 
+export function seat_recreate() {
+    var attendanceCheckData = JSON.parse(sessionStorage.getItem("attendanceCheckData"));
+    var pxData = -20;
+
+    document.getElementById('seat_sub_text').innerText = `현재 출석 : ${attendanceCheckData['attendance'].length}명, 결석 : ${attendanceCheckData['absenteeism'].length}명`;
+
+    $('.fa-user-alt').remove();
+
+    $(function() {
+        for (var j = 0; j < attendanceCheckData['all_student'].length; j++) {
+            pxData = pxData + 80;
+            $('#seat_user').append(`
+                <i class="fas fa-user-alt" id="${attendanceCheckData['all_student'][j]}" style="
+                    position: absolute;
+                    color: gray;
+                    font-size: 70px;
+                    margin-top: 20px;
+                    margin-left: ${pxData}px;
+                "></i>
+            `);
+        }
+    });
+
+    $('#seat_ticket').hide();
+}
+
 export function toggle_seat_ticket(seat_ticket) {
     var seat_classes = seat_ticket.classList;
     var seat = seat_classes.toggle('users');
