@@ -228,6 +228,18 @@
         font-weight: 900;
     }
 
+    .seat_button {
+        position: absolute;
+        font-weight: 900;
+        border: solid 2px blue;
+        outline: none;    
+        background-color: blue;
+        color: black;
+        border-radius: 10px;
+        margin-left: 92%;
+        margin-top: -6%;
+    }
+
     .seat_sub_text {
         color: white;
         font-weight: 900;

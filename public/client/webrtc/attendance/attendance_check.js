@@ -1,4 +1,4 @@
-export function attendanceCheck(socket, roomId, user, check_student) {
+export function attendanceCheck(socket, roomId, user, check_student, seat_recreate) {
     var client_array = [];
 
     Swal.fire({
@@ -43,5 +43,6 @@ export function attendanceCheck(socket, roomId, user, check_student) {
             );
             sessionStorage.setItem("attendanceCheckData", JSON.stringify(attendanceCheckData));
         }
+        seat_recreate();
     });
 }
