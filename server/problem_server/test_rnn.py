@@ -5,7 +5,7 @@ import json
 sample_review = ('The movie was cool. The animation and the graphics '
 'were out of this world. I would recommend this movie.')
 
-rnn_model_path = 'C:/Users/user/Desktop/s-class-version-3.0/server/problem_server/model/rnn_model/rnn_test'
+rnn_model_path = 'C:/Users/jun09/OneDrive/Desktop/s-class_system_version/s-class_version-3/server/problem_server/model/rnn_model/rnn_test'
 
 def load_model(load_model):
     load_rnn_model = tf.keras.models.load_model(load_model)
