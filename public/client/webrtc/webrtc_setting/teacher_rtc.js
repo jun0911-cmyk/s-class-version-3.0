@@ -10,7 +10,7 @@ import {WaitingRoom} from "../wait_room/host_waiting_room.js";
 //import {audio_devices_setting} from "../device_setting/select_devices_setting.js";
 import {attendanceCheck} from "../attendance/attendance_check.js";
 import {problem_search} from "../problem_books/select_problem.js";
-import {toggle_seat_ticket} from "../attendance/seat_ticket.js";
+import {create_seat_table, toggle_seat_ticket} from "../attendance/seat_ticket.js";
 //import {SDPOfferProtoCol, SDPStatusProtoCol} from "../webrtc_protocol/p2p_protocol.js";
 
 const socket = window.io();
@@ -58,8 +58,10 @@ $(function() {
             var attendanceCheck_array = [];
 
             WaitingRoom(socket, roomId);
+            create_seat_table(roomId, user);
 
             $('#localScreenVideo').hide();
+            $('#seat_ticket').hide();
 
             // MediaStream connect
             muteAudio.addEventListener('click', audios);
@@ -67,6 +69,33 @@ $(function() {
             attendance.addEventListener('click', start_attendanceCheck);
             problem_book.addEventListener('click', problem_page);
             seat_ticket.addEventListener('click', set_seat_ticket);
+            document.getElementById('seat_button').addEventListener('click', seat_recreate);
+
+            function seat_recreate() {
+                var attendanceCheckData = JSON.parse(sessionStorage.getItem("attendanceCheckData"));
+                var pxData = -20;
+
+                document.getElementById('seat_sub_text').innerText = `현재 출석 : ${attendanceCheckData['attendance'].length}명, 결석 : ${attendanceCheckData['absenteeism'].length}명`;
+
+                $('.fa-user-alt').remove();
+
+                $(function() {
+                    for (var j = 0; j < attendanceCheckData['all_student'].length; j++) {
+                        pxData = pxData + 80;
+                        $('#seat_user').append(`
+                            <i class="fas fa-user-alt" id="${attendanceCheckData['all_student'][j]}" style="
+                                position: absolute;
+                                color: gray;
+                                font-size: 70px;
+                                margin-top: 20px;
+                                margin-left: ${pxData}px;
+                            "></i>
+                        `);
+                    }
+                });
+
+                $('#seat_ticket').hide();
+            }
 
             function start_attendanceCheck() {
                 socket.emit('check_attendanceCheck', roomId, user);
@@ -90,13 +119,13 @@ $(function() {
                             'error'
                         );
                     } else if (attendanceCheck_array.length != 0) {
-                        attendanceCheck(socket, roomId, user, student);
+                        attendanceCheck(socket, roomId, user, student, seat_recreate);
                     }
                 });
             }
 
             function set_seat_ticket() {
-                toggle_seat_ticket(socket, roomId, user, seat_ticket);
+                toggle_seat_ticket(seat_ticket);
             }
         
             function audios() {
