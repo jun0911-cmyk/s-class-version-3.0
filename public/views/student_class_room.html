@@ -54,11 +54,16 @@
     </div>
     <div class="user_chat">
         <div class="chat">
-            <h3 class="chat_title">채팅</h3>
+            <h3 class="chat_title">질문하기</h3>
+            <div class="question_chat">
+                <div class="question">
+                    <p class="question_msg">익명1 : 안녕하세요. 선생님 1 + 2의 정답의 해설이 무엇인지 여쭈어봐도 될까요?</p>
+                </div>
+            </div>
             <div class="chat_msg">
-                <label>받는 사람 :</label>
+                <label>질문 설정 :</label>
                 <select class="chat_content">
-                    <option>모두</option>
+                    <option>기본질문</option>
                     <option>호스트만</option>
                 </select>
             </div>
@@ -67,7 +72,7 @@
                 font-size: 18px;"></i>
                 <span class="file_content">파일</span>
             </div>
-            <input type="text" placeholder="여기에 메시지를 입력해주세요 ..." class="service_chat" size="30">
+            <input type="text" placeholder="여기에 질문을 입력해주세요 ..." class="service_chat" id="service_chat" size="30" autocomplete="off">
         </div>
     </div>
     <div class="audio_video">

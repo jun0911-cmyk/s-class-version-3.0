@@ -205,6 +205,22 @@
         margin-top: 10px;
     }
 
+    .question {
+        position: absolute;
+        font-size: 15px;
+        margin-top: 3%;
+        width: auto;
+        height: auto;
+        word-break: break-word;
+        border-radius: 10px;
+        background-color: black;
+    }
+
+    .question_msg {
+        margin-top: 4%;
+        margin-left: 5%;
+    }
+
     .chat_msg {
         position: absolute;
         margin-top: 330px;
