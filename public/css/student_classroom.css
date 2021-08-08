@@ -327,9 +327,80 @@
         to   {  -webkit-transform: rotate(360deg); }
     }
 
+    .class_room_content {
+        position: absolute;
+        width: 10%;
+        height: 3.64%;
+        border: 1px solid black;
+        border-radius: 15px 15px 0 0;
+        background-color: #222222;
+        color: white;
+        margin-top: -15.6%;
+    }
+    
+    .class_room_text {
+        text-align: center;
+        margin-top: 3%;
+        margin-left: -1%; 
+    }
+
+    .class_room_content:hover {
+        cursor: pointer;
+        background-color: #473030;
+        border: 1px solid #473030;
+    }
+
+    .user_content {
+        position: absolute;
+        width: 10%;
+        height: 3.64%;
+        border: 1px solid black;
+        border-radius: 15px 15px 0 0;
+        background-color: #222222;
+        margin-top: -15.6%;
+        margin-left: 10%;
+        color: white;
+    }
+
+    .user_text {
+        text-align: center;
+        margin-top: 3%;
+        margin-left: -1%; 
+    }
+
+    .user_content:hover {
+        cursor: pointer;
+        background-color: #473030;
+        border: 1px solid #473030;
+    }
+
+    .problem_page_content {
+        position: absolute;
+        width: 10%;
+        height: 3.64%;
+        border: 1px solid black;
+        border-radius: 15px 15px 0 0;
+        background-color: #222222;
+        margin-top: -15.6%;
+        margin-left: 20%;
+        color: white;
+    }
+
+    .problem_page_text {
+        text-align: center;
+        margin-top: 3%;
+        margin-left: -1%; 
+    }
+
+    .problem_page_content:hover {
+        cursor: pointer;
+        background-color: #473030;
+        border: 1px solid #473030;
+    }
+
     .live_context {
         font-family: 'Cafe24Ohsquare';
-        margin-top: -15.5%;
+        margin-top: -13.5%;
         left: 32%;
         color: #0d1117;
         position: absolute;
@@ -353,6 +424,10 @@
         position: absolute;
         z-index: 50;
     }
+
+    .video_cont {
+        border-radius: 48px 0 0 0;
+    }
     
     video {
         background: #222;
@@ -365,52 +440,16 @@
 
     .remote_video_cont {
         margin-left: -100%;
-        margin-top: -0%;
+        margin-top: 2.06%;
         width: 1470px;
-        height: 867px;
+        height: 827px;
         position: absolute;
         z-index: 30;
-    }
-
-    .user_session {
-        width: 450px;
-        height: 200px;
-        border: 3px solid black;
-        margin-left: 76.54%;
-        margin-top: -6px;
-    }
-
-    .session_search_text {
-        margin-left: 85px; 
-        position: absolute; 
-        font-size: 16px; 
-        margin-top: 13px;
-        width: 300px;
-        height: 30px;
-        border-radius: 10px;
-        border: 2px solid black;
-    }
-
-    .session_search {
-        border: 2px solid black;
-        margin-top: 15px;
-        margin-left: 115px;
-        background-color: #f7f2f2;
-        z-index: 40;
-        border:none;
-    }
-    
-    .user_session_title {
-        font-weight: 600;
-        font-size: 20px;
-        text-align: center;
-        color: gray;
-        margin-top: 50px;
     }
     
     .user_chat {
         width: 450px;
-        height: 443px;
+        height: 637px;
         border: 3px solid black;
         margin-left: 76.54%;
         margin-top: -6px;
@@ -427,7 +466,7 @@
 
     .chat_msg {
         position: absolute;
-        margin-top: 330px;
+        margin-top: 540px;
         margin-left: 20px;
     }
 
@@ -438,7 +477,7 @@
 
     .file_select {
         position: absolute;
-        margin-top: 335px;
+        margin-top: 545px;
         margin-left: 300px;
     }
 
@@ -449,7 +488,7 @@
     .service_chat {
         border-style: none;
         margin-left: 20px; 
-        margin-top: 370px;
+        margin-top: 580px;
         background-color: #f7f2f2;
         border: none;
     }

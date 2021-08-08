@@ -426,45 +426,9 @@
         color: #828282;
     }
 
-    .user_session {
-        width: 450px;
-        height: 200px;
-        border: 3px solid black;
-        margin-left: 76.54%;
-        margin-top: -6px;
-    }
-
-    .session_search_text {
-        margin-left: 85px; 
-        position: absolute; 
-        font-size: 16px; 
-        margin-top: 13px;
-        width: 300px;
-        height: 30px;
-        border-radius: 10px;
-        border: 2px solid black;
-    }
-
-    .session_search {
-        border: 2px solid black;
-        margin-top: 15px;
-        margin-left: 115px;
-        background-color: #f7f2f2;
-        z-index: 40;
-        border:none;
-    }
-    
-    .user_session_title {
-        font-weight: 600;
-        font-size: 20px;
-        text-align: center;
-        color: gray;
-        margin-top: 50px;
-    }
-
     .user_chat {
         width: 450px;
-        height: 443px;
+        height: 637px;
         border: 3px solid black;
         margin-left: 76.54%;
         margin-top: -6px;
@@ -481,7 +445,7 @@
 
     .chat_msg {
         position: absolute;
-        margin-top: 330px;
+        margin-top: 540px;
         margin-left: 20px;
     }
 
@@ -492,7 +456,7 @@
 
     .file_select {
         position: absolute;
-        margin-top: 335px;
+        margin-top: 545px;
         margin-left: 300px;
     }
 
@@ -503,7 +467,7 @@
     .service_chat {
         border-style: none;
         margin-left: 20px; 
-        margin-top: 370px;
+        margin-top: 580px;
         background-color: #f7f2f2;
         border: none;
     }

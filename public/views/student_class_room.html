@@ -23,6 +23,21 @@
     <div id="root"></div>
     <video id="localVideo" class="video_cont" playsinline autoplay muted></video>
     <video id="remoteVideo" class="remote_video_cont" playsinline autoplay></video>
+    <div class="class_room_content">
+        <i class="fas fa-circle" style="position: absolute;
+        margin-top: 4.8%; margin-left: 10%; color: greenyellow;"></i>
+        <p class="class_room_text">현재 강의실 화면</p>
+    </div>
+    <div class="user_content">
+        <i class="fas fa-user" style="position: absolute;
+        margin-top: 4.8%; margin-left: 10%; color: gray;"></i>
+        <p class="user_text">참가자 목록 화면</p>
+    </div>
+    <div class="problem_page_content">
+        <i class="fas fa-book" style="position: absolute;
+        margin-top: 4.8%; margin-left: 14%; color: brown;"></i>
+        <p class="problem_page_text">문제풀이 화면</p>
+    </div>
     <div class="live_context">
         <span class="live">실시간 강의중</span>
         <span class="live_vue"></span>
@@ -39,25 +54,12 @@
             </div>
         </a>
     </div>
-    <div class="user_session">
-        <div class="user_search">
-            <label class="session_search_text">
-                <i style="
-                margin-left: 
-                10px; margin-top: 5px;" 
-                class="fas fa-search">
-                </i>
-            </label>
-            <input type="text" placeholder="수강자 검색" class="session_search" size="30">
-            <h3 class="user_session_title">참가자 목록이 여기에 표시됩니다.</h3>
-        </div>
-    </div>
     <div class="user_chat">
         <div class="chat">
             <h3 class="chat_title">질문하기</h3>
             <div class="question_chat">
                 <div class="question">
-                    <p class="question_msg">익명1 : 안녕하세요. 선생님 1 + 2의 정답의 해설이 무엇인지 여쭈어봐도 될까요?</p>
+                    <p class="question_msg"></p>
                 </div>
             </div>
             <div class="chat_msg">
