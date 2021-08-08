@@ -26,6 +26,7 @@ const screen = document.getElementById('screens');
 const videoSelect = document.getElementById('VideoSelect');
 const problem_book = document.getElementById('levels');
 const seat_ticket = document.getElementById('users');
+const answerSend = document.getElementById('service_chat');
 const audioOutputSelect = document.getElementById('AudioOutputSelect');
 const audioInputSelect = document.getElementById('AudioInputSelect');
 const selectors = [videoSelect, audioInputSelect, audioOutputSelect];
@@ -63,12 +64,17 @@ $(function() {
             $('#localScreenVideo').hide();
             $('#seat_ticket').hide();
 
-            // MediaStream connect
             muteAudio.addEventListener('click', audios);
             muteVideo.addEventListener('click', videos);
             attendance.addEventListener('click', start_attendanceCheck);
             problem_book.addEventListener('click', problem_page);
             seat_ticket.addEventListener('click', set_seat_ticket);
+            answerSend.addEventListener('keypress', function(e) {
+                if (e.key == 'Enter') {
+                    $('#service_chat').val('');
+                }
+            });
+
             document.getElementById('seat_button').addEventListener('click', seat_recreate);
 
             function start_attendanceCheck() {

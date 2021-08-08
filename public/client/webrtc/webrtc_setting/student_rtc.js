@@ -34,7 +34,6 @@ $(function() {
             var audioSource = localStorage.getItem('audioSource');
             var audioOutPutSinkid = localStorage.getItem('audioOutPutSinkid');
 
-            // MediaStream connect
             muteAudio.addEventListener('click', audios);
             muteVideo.addEventListener('click', videos);
             questionSend.addEventListener('keypress', function(e) {
