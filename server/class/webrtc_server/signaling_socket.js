@@ -516,10 +516,15 @@ module.exports = function(app, io) {
             });
         });
 
+        // 가상좌석표
         socket.on('attendance_seat_ticket', function(client, attendance, roomId, user) {
             if (user.user_id == roomId) {
                 socket.emit('attendance_seat_ticket', attendance, client);
             }
+        });
+
+        socket.on('send_Question', function(roomId, question, user) {
+            io.to(roomId).emit('on_Question', roomId, question, user);
         });
 
         socket.on('disconnect', function() {

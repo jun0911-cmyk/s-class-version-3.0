@@ -11,6 +11,7 @@ import {WaitingRoom} from "../wait_room/host_waiting_room.js";
 import {attendanceCheck} from "../attendance/attendance_check.js";
 import {problem_search} from "../problem_books/select_problem.js";
 import {create_seat_table, seat_recreate, toggle_seat_ticket} from "../attendance/seat_ticket.js";
+import {question_send} from "../questionQueue/question.js";
 //import {SDPOfferProtoCol, SDPStatusProtoCol} from "../webrtc_protocol/p2p_protocol.js";
 
 const socket = window.io();
@@ -186,6 +187,10 @@ $(function() {
 
             socket.on('join', function(client) {
                 console.log(client);
+            });
+
+            socket.on('on_Question', function(send_roomId, question, send_user) {
+                question_send(roomId, send_roomId, send_user, user, question);
             });
 
             host_leave_class(socket, remoteVideo);
