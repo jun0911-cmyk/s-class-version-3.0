@@ -2,7 +2,7 @@ export async function problem_search(user, roomId) {
     const { value: problem_cate } = await Swal.fire({
         title: `문제 카테고리를 입력해주세요.`,
         input: 'text',
-        inputLabel: '입력 예시 ex): 과목명, 문제카테고리 = 수학, 근해공식 (특수문자 구분 필수)',
+        inputLabel: '입력 예시 ex): 과목명, 문제카테고리 = 수학, 근의공식 (특수문자 구분 필수)',
         icon: 'info'
     });
 
