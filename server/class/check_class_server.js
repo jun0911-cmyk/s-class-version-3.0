@@ -17,6 +17,7 @@ module.exports = function(app) {
         }
     });
 
+    // 학생 출결목록 라우터
     app.post('/student/check/class', (req, res) => {
         if(req.isAuthenticated()) {
             models.User.findOne({
