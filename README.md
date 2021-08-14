@@ -14,6 +14,7 @@ webRTC를 이용한 화상 수업 (비공개) - 데이터 버전 3.0 (최신)
     npm install
     서버 디렉토리와 메인 디렉토리의 기본 모듈 설치
 ##### 서버 실행
+    path -> s-class-version-3.0/server
     npm i -g nodemon
     nodemon server
     OR
