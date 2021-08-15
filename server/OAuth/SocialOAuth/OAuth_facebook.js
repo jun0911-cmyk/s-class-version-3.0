@@ -14,6 +14,7 @@ try {
 }
 
 module.exports = function(app, passport) {
+    // 네이버 로그인 로직과 같음
     passport.use(new FacebookStrategy({
         clientID: config.facebook.clientID,
         clientSecret: config.facebook.clientSecret,

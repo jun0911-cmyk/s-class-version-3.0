@@ -70,6 +70,8 @@ app.use('/s-class', express.static('../public/css'));
 app.use('/s-class', express.static('../public/client'));
 app.use('/s-class', express.static('../public/favicon'));
 
+
+// 서버 접속시 라우터 경로 변경
 app.get('/', (req, res) => {
     //console.log(req.user);
     console.log('cookie : ', req.cookies);
@@ -79,6 +81,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/s-class', (req, res, next) => {
+    // 로그인 세션 유저 쿠키 암호화
     function auth_cookie(email, user_group, platform) {
         var hashemail = crypto.createHash('sha512').update(email).digest('base64');
         var hashgroup = crypto.createHash('sha512').update(user_group).digest('base64');
@@ -100,6 +103,7 @@ app.post('/s-class', (req, res, next) => {
             singed: true
         }); 
     }
+    // 로그인 유무가 True면 쿠키 등록
     const conn = req.body.connect;
     console.log(req.isAuthenticated());
     if(req.isAuthenticated()) {
@@ -110,6 +114,7 @@ app.post('/s-class', (req, res, next) => {
         res.json({ auth: false });
     }
     if(conn == 1) {
+        // 사용자 연결 성공 메시지
         console.log('main server connection success');
     }
 });

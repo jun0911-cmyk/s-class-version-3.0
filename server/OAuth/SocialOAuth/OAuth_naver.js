@@ -15,12 +15,14 @@ try {
 }
 
 module.exports = function(app, passport) {
+    // 네이버 소셜 로그인 전용
     passport.use(new NaverStrategy({
         clientID: config.naver.clientID,
         clientSecret: config.naver.clientSecret,
         callbackURL: config.naver.callback
     }, 
     function (accessToken, refreshToken, profile, done) {
+        // 이미 가입된 유저가 있는지 확인
         models.User.findOne({
             where: {
                 email: profile.emails[0].value,
@@ -28,6 +30,7 @@ module.exports = function(app, passport) {
             }
         }).then(function(user) {
             var date = new Date();
+            // 가입된 유저가 없으면 새로 생성
             if(!user) {
                 models.User.create({
                     email: profile.emails[0].value,
@@ -42,12 +45,14 @@ module.exports = function(app, passport) {
                 })
                 .catch(err => done(err));
             } else {
+                // 이미 있으면 바로 로그인
                 return done(null, user);
             }
         })
         .catch(err => done(err));
     }));
 
+    // 네이버에 있는 프로필 scope를 받아옴
     app.get('/auth/naver', passport.authenticate('naver', { scope: ['profile'] }));
 
     app.get('/auth/naver/callback', passport.authenticate('naver', { failureRedirect: '/user/login' }),

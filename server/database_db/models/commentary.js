@@ -1,3 +1,4 @@
+// 시퀄라이즈 데이터베이스 등록 (문제 해설 데이터 베이스)
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('commentary_db', {
         problem_id: {

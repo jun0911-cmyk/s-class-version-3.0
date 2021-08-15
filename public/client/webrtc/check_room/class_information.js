@@ -14,16 +14,6 @@ $(function() {
             var roomId = result.roomid;
 
             var calases = information.classList;
-            
-            var classRoomId;
-            var classRoomName;
-            var classRoomTeacher;
-
-            socket.on('Call_RoomData', function(room) {
-                classRoomId = room.class_id;
-                classRoomName = room.class_name;
-                classRoomTeacher = room.teacher;
-            });
 
             click_information.addEventListener("click", () => {
                 var push = calases.toggle('fa-info-circle');
@@ -35,7 +25,7 @@ $(function() {
                         margin-left: 305px"></i>
                         <h2 class="title">${classRoomName}</h2>
                         </br>
-                        <span>강의실 ID : ${classRoomId}</span>
+                        <span>강의실 ID : ${roomId}</span>
                         </br></br>
                         <span>강의자 : ${classRoomTeacher}</span>
                         </br></br>

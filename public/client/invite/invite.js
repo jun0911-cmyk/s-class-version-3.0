@@ -107,6 +107,7 @@ $(function() {
                             cancelButtonText: '취소'
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                room_socket.emit('delect_student', delect_teacher_email, data);
                                 room_socket.emit('delect_teacher', delect_teacher_email, data);
                             }
                         });

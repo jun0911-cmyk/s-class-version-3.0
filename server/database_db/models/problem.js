@@ -1,3 +1,4 @@
+// 시퀄라이즈 데이터베이스 등록 (문제 데이터 베이스)
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('problem_db', {
         problem_id: {
@@ -37,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         school_lavel: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        commentary: {
+            type: DataTypes.INTEGER
         },
         questioner: {
             type: DataTypes.STRING,

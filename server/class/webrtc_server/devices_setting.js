@@ -28,6 +28,7 @@ module.exports = function(app, io, server) {
         }
     });
 
+    // 디바이스 장치 선택 페이지 라우터
     app.post('/class/live/room/classroom/setting/:roomid&:pwd', (req, res) => {
         if(req.isAuthenticated()) {
             res.json({ user: req.user, roomid: roomId });

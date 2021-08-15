@@ -6,7 +6,6 @@ const { QueryTypes } = require('sequelize');
 const io = require('socket.io')(server);
 
 var clients;
-var numClients;
 
 var host = [];
 var host_data;
@@ -114,7 +113,7 @@ module.exports = function(app, io) {
         });
 
         // 초대코드 체크
-        socket.on('checkInviteCode', function(InviteCode) {
+        socket.on('checkInviteCode', function(InviteCode, user) {
             models.teacher.findOne({
                 where: {
                     invite_code: InviteCode
@@ -123,13 +122,46 @@ module.exports = function(app, io) {
                 if (result == null) {
                     socket.emit('fail_code', InviteCode);
                 } else {
-                    if (result.invite_code == InviteCode) {
+                    const array = user.select_teacher.split(", ");
+                    var check_array = [];
+                    for(var i = 0; i < array.length; i++) {
+                        if (array[i] == result.email) {
+                            check_array.push(array[i]);
+                        }
+                    }
+                    if (check_array.length == 0) {
                         socket.emit('success_code', InviteCode, result);
-                    } else {
-                        socket.emit('fail_code', InviteCode);
+                    } else if (check_array.length != 0) {
+                        socket.emit('userOverlap', result.user_id);
                     }
                 }
             });
+        });
+
+        // 교사 DB에 학생 이름 추가
+        socket.on('AddTeacherInvite', function(classname, user) {
+            models.teacher.findOne({
+                where: {
+                    email: classname
+                }
+            }).then(function(teacher) {
+                if (teacher.access_student == 'not student') {
+                    models.teacher.update({
+                        access_student: user.email
+                    }, {
+                        where: {
+                            email: classname
+                        }
+                    })
+                    .catch(err => console.log(err));
+                    return;
+                }
+
+                if (teacher.access_student != 'not student') {
+                    models.sequelize.query(`UPDATE teacher_dbs SET access_student = CONCAT(access_student, ', ${user.email}') WHERE email = '${classname}'`, { type: QueryTypes.UPDATE })
+                    .catch(err => console.log(err));
+                }
+            })
         });
 
         // 학생 DB에 담당 교사 이름 추가
@@ -142,7 +174,7 @@ module.exports = function(app, io) {
                         email: user.email
                     }
                 }).then(function(result) {
-                    socket.emit('successInvite', result)
+                    socket.emit('successInvite', result);
                 })
                 .catch(err => console.log(err));
                 return;
@@ -227,6 +259,36 @@ module.exports = function(app, io) {
                     }
                 }
             }
+        });
+
+        // 강사리스트에서 해당 학생 제거
+        socket.on('delect_student', function(delectUser, user) {
+            models.teacher.findOne({
+                email: delectUser
+            }).then(function(teacher_result) {
+                const teacher_array = teacher_result.access_student.split(", ");
+                if (teacher_array.length == 1) {
+                    models.teacher.update({
+                        access_student: 'not student'
+                    }, {
+                        where: {
+                            email: delectUser
+                        }
+                    });
+                } else if (teacher_array.length != 1) {
+                    for (j = 0; j < teacher_array.length; j++) {
+                        if (teacher_array[j] != user.email) {
+                            models.teacher.update({
+                                access_student: teacher_array[j]
+                            }, {
+                                where: {
+                                    email: delectUser
+                                }
+                            });
+                        }
+                    }
+                }
+            });
         });
 
         // 온라인 강의 목록 추가
@@ -371,19 +433,21 @@ module.exports = function(app, io) {
 
         // JOIN CLASS
         socket.on('join_class', function(roomId, email, user) {
-            for (var i = 0; i < host.length; i++) {
-                if (host[i].id == roomId) {
-                    models.class.findOne({
-                        where: {
-                            class_id: host[i].id
-                        }
-                    }).then(function(room) {
-                        if (room.class_status == 1 && email == user.email) {
-                            socket.emit('joined', roomId, clients);
-                        }
-                    });
+            models.teacher.findOne({
+                where: {
+                    user_id: roomId
                 }
-            }
+            }).then(function(teacher) {
+                models.class.findOne({
+                    where: {
+                        class_id: teacher.user_id
+                    }
+                }).then(function(room) {
+                    if (room.class_status == 1 && email == user.email) {
+                        socket.emit('joined', roomId, clients);
+                    }
+                });
+            });
         });
 
         socket.on('join_fail', function(roomId, email, user) {
@@ -424,10 +488,47 @@ module.exports = function(app, io) {
             }
         });
 
-        socket.on('disconnect', function() {
+        // 전자출석부 확인
+        socket.on('check_attendanceCheck', function(roomId, user) {
+            if (client.length == 0) {
+                socket.emit('null_student');
+                return;
+            } else {
+                models.class.findOne({
+                    where: {
+                        class_id: roomId
+                    }
+                }).then(function(class_data) {
+                    socket.emit('ready_attendanceCheck', roomId, user, client, class_data.limit_join);
+                });
+            }
         });
 
-        // 강의실 종료와 나가기는 통신 피어 구분자와 아이디로 파악하여 종료해야 하고 일일히 트랙을 멈춰야 한다, 아직까지 1:1에서만 최적화 되어있기에 3명이상 접속하면 작동이 되지 않는다. 따라서 피어구분자와 1:N이 최적화 되는 즉시 다시 머지 할것이다.
+        // 전자출석부
+        socket.on('attendanceCheck', function(roomId, user) {
+            models.teacher.findOne({
+                where: {
+                    email: user.email
+                }
+            }).then(async function(teacher) {
+                const array = teacher.access_student.split(", ");
+                socket.emit('attendanceCheck', roomId, user, array, client);
+            });
+        });
+
+        // 가상좌석표
+        socket.on('attendance_seat_ticket', function(client, attendance, roomId, user) {
+            if (user.user_id == roomId) {
+                socket.emit('attendance_seat_ticket', attendance, client);
+            }
+        });
+
+        socket.on('send_Question', function(roomId, question, user) {
+            io.to(roomId).emit('on_Question', roomId, question, user);
+        });
+
+        socket.on('disconnect', function() {
+        });
 
         // CLOSE CLASS 강의실 종료
         socket.on('close_class', function(roomId) {

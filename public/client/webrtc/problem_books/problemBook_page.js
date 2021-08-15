@@ -40,6 +40,13 @@ $(function() {
                     }
                 },
                 created() {
+                    for(var i = 0; i < problem.length; i++) {
+                        if (problem_count.rows[i].commentary == 0) {
+                            problem_count.rows[i].commentary = '🔴 (등록안됨)'
+                        } else {
+                            problem_count.rows[i].commentary = '🟢 (등록됨)'
+                        }
+                    }
                     this.problem_data = problem_count.rows
                 }
             });

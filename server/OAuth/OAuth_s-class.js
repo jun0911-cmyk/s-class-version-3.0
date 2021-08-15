@@ -16,7 +16,6 @@ try {
 }
 
 module.exports = function(app, passport) {
-
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use('/user/login', express.static('../public/css'));
@@ -32,13 +31,16 @@ module.exports = function(app, passport) {
         }
     });
 
+    // 유저 직렬화
     passport.serializeUser((user, done) => {
         done(null, user.id);
         console.log("Serialize");
     });
 
+    // 유저 역직렬화
     passport.deserializeUser((id, done) => {
         console.log("DeSerialize");
+        // 아이디가 일치하는 row 찾음
         models.User.findByPk(id).then(user => {
             if (user) {
                 done(null, user);
@@ -52,6 +54,7 @@ module.exports = function(app, passport) {
         usernameField: 'email',
         passwordField: 'password',
     }, (username, password, done) => {
+        // 암호화 해제
         var hashpwd = crypto.createHash('sha512').update(password).digest('base64');
         models.User.findOne({ 
             where: { 
@@ -59,9 +62,11 @@ module.exports = function(app, passport) {
                 password: hashpwd
             }
         }).then(function(user) {
+            // 아이디가 일치하지 않을때
             if (!user) {
                 return done(null, false, { message : 'Incorrect username.' });
             }
+            // 비밀번호 일치하지 않을때
             if(!user.password == password) {
                 return done(null, false, { message : 'Incorrect password.' });
             }
@@ -73,6 +78,7 @@ module.exports = function(app, passport) {
     app.post('/user/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
             if (err) { 
+                // 로그인 에러시 500 에러 발생
                 return res.status(500).json({ result: err }).status(500); 
             }
             if (!user) {
@@ -81,6 +87,7 @@ module.exports = function(app, passport) {
             req.logIn(user, function(err) {
                 if (err) { return next(err); 
             }
+                // 로그인 세션 등록
                 req.session.login = 1;
                 req.session.user = user.email;
                 req.session.save(function() {
@@ -90,6 +97,7 @@ module.exports = function(app, passport) {
         })(req, res, next);
     });
 
+    // 로그아웃시 세션 파괴
     app.get('/user/logout', function(req, res) {
         req.logout();
         req.session.destroy();

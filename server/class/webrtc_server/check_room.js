@@ -27,6 +27,7 @@ module.exports = function(app, io, server) {
         }
     });
 
+    // 강의실 대기실 라우터
     app.post('/class/check/room/:roomid', (req, res) => {
         if(req.isAuthenticated()) {
             res.json({ user: req.user, roomid: roomId });

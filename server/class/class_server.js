@@ -24,6 +24,7 @@ module.exports = function(app) {
         }
     });
 
+    // 학생 강의실 라우터
     app.post('/student/class', (req, res) => {
         if(req.isAuthenticated()) {
             models.User.findOne({

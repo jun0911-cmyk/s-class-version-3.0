@@ -17,6 +17,7 @@ try {
 }
 
 module.exports = function(app, passport) {
+    // 네이버 로그인 로직과 같음
     passport.use(new KakaoStrategy({
         clientID: config.kakao.clientID,
         clientSecret: config.kakao.clientSecret,
