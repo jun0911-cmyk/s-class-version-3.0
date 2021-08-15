@@ -21,6 +21,7 @@ module.exports = function(app, io, server) {
         }
     });
 
+    // 강의실 화면공유 라우터
     app.post('/class/live/room/classroom/screen/:roomid&:pwd', (req, res) => {
         if(req.isAuthenticated()) {
             res.json({ user: req.user, roomid: roomId });

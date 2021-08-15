@@ -32,11 +32,13 @@ module.exports = function(app, passport) {
         }
     });
 
+    // 유저 직렬화
     passport.serializeUser((user, done) => {
         done(null, user.id);
         console.log("Serialize");
     });
 
+    // 유저 역직렬화
     passport.deserializeUser((id, done) => {
         console.log("DeSerialize");
         models.User.findByPk(id).then(user => {
@@ -90,6 +92,7 @@ module.exports = function(app, passport) {
         })(req, res, next);
     });
 
+    // 로그아웃시 세션 파괴
     app.get('/user/logout', function(req, res) {
         req.logout();
         req.session.destroy();

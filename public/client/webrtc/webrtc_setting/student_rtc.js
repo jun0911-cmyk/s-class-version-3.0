@@ -4,6 +4,7 @@ import {sendMessage, onMessage} from "../webrtc_protocol/signaling_client.js";
 import {leave_call, client_leave_class} from "../leave_class/exit_class.js";
 import {mute_audio, enabled_video} from "../device_setting/devices_mute.js";
 import {client_close_class} from "../leave_class/delete_class.js";
+import {question_send} from "../questionQueue/question.js";
 // import {SDPAnswerProtoCol} from "../webrtc_protocol/p2p_protocol.js";
 
 const socket = window.io();
@@ -11,6 +12,7 @@ const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
 const muteAudio = document.getElementById('audios');
 const muteVideo = document.getElementById('videos');
+const questionSend = document.getElementById('service_chat');
 const rtcPeerConnection = new RTCPeerConnection({
     iceServers: [{
         urls: 'stun:stun.l.google.com:19302'
@@ -32,9 +34,14 @@ $(function() {
             var audioSource = localStorage.getItem('audioSource');
             var audioOutPutSinkid = localStorage.getItem('audioOutPutSinkid');
 
-            // MediaStream connect
             muteAudio.addEventListener('click', audios);
             muteVideo.addEventListener('click', videos);
+            questionSend.addEventListener('keypress', function(e) {
+                if (e.key == 'Enter') {
+                    socket.emit('send_Question', roomId, $('#service_chat').val(), user);
+                    $('#service_chat').val('');
+                }
+            });
         
             function audios() {
                 mute_audio(localVideo, localStream);
@@ -87,6 +94,11 @@ $(function() {
                         window.open(`/class/live/room/classroom/screen/10329912&testing&testing`);
                     }
                 });
+            });
+
+            socket.on('on_Question', function(send_roomId, question, send_user) {
+                console.log(question);
+                question_send(roomId, send_roomId, send_user, user, question);
             });
 
             leave_call(socket, roomId, user);

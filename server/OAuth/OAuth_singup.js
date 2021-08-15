@@ -33,11 +33,14 @@ module.exports = function(app, crypto) {
     });
     
     app.post('/user/singup', (req, res, next) => {
+        // Ajax 데이터 response
         var email = req.body.email;
         var pwd = req.body.password;
         var repwd = req.body.repassword;
 
+        // 비밀번호 정규 표현식
         var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+        // 이메일 형식 정규 표현식
         var regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}/;
 
         if (pwd != repwd) {
@@ -60,6 +63,7 @@ module.exports = function(app, crypto) {
             return;
         }
 
+        // User_db에 회원가입 유저 정보 등록
         else {
             var date = new Date();
             var hashpwd = crypto.createHash('sha512').update(pwd).digest('base64');
@@ -83,6 +87,7 @@ module.exports = function(app, crypto) {
                     })
                     .catch(err => console.log(err));
                 } else {
+                    // 이미 해당 이메일로 가입한 사용자가 있으면 return
                     res.json({ result: 1, msg: "이미 가입하신 이메일이 있습니다. 다른 이메일로 가입하시거나 로그인해주세요." })
                 }
             })
