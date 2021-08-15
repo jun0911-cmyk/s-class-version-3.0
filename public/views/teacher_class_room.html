@@ -20,105 +20,74 @@
     <link rel="shortcut icon" href="#">
     <title>S-클래스 - 화상 수업 플랫폼을 지금 S-클래스에서 바로 진행해보세요.</title>
 </head>
-<body onbeforeunload="return 0;">
+<body style="background-color: #202124;">
     <div id="root"></div>
     <video id="localVideo" class="video_cont" playsinline autoplay muted></video>
-    <video id="localScreenVideo" class="video_cont" playsinline autoplay></video>
-    <div class="localselect" style="position: absolute;">
-        <button id="my_video" class="my_video">내 화면</button>
-        <button id="my_screen_video" class="my_screen_video">화면공유 화면</button>
-    </div>
     <video id="remoteVideo" class="remote_video_cont" playsinline autoplay></video>
     <!--<div class="mute">
         <i id="slash_audio" class="fas fa-microphone-slash" style="color: red; margin-right: 5px"></i>
         <i id="slash_video" class="fas fa-video-slash" style="color: red; margin-right: 10px"></i>
         <span class="client_status" id="class_status" style="margin-left: auto;">jkw080305@naver.com</span>
     </div>!-->
-    <h3 class="remote_title" id="remote_title">수강자 화면이 여기에 표시됩니다.</h3>
     <div class="seat_ticket" id="seat_ticket">
         <seat_ticket-component></seat_ticket-component>
     </div>
-    <div class="live_context">
-        <span class="live">실시간 강의중</span>
-        <span class="live_vue"></span>
-        <a href="#noscroll">
-            <div class="dropdown" id="information">
-                <a href="javascript:void(0)" id="click_information">
-                    <i class="fas fa-info-circle" style="
-                    color: white;
-                    font-size: 20px;
-                    margin-left: 830px;"></i>
-                </a>
-                <div class="dropdown-content" id="dropdown">
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="user_chat">
-        <div class="chat">
-            <h3 class="chat_title">답변하기</h3>
-            <div class="chat_msg">
-                <label>답변 설정 :</label>
-                <select class="chat_content">
-                    <option>모두</option>
-                    <option>학생선택</option>
-                </select>
-            </div>
-            <div class="file_select">
-                <i class="far fa-file" style="
-                font-size: 18px;"></i>
-                <span class="file_content">파일</span>
-            </div>
-            <input type="text" placeholder="여기에 답변을 입력해주세요 ..." class="service_chat" id="service_chat" size="30" autocomplete="off">
+    <div class="class_setting">
+        <!--오디오 셋팅-->
+        <div href="#noscroll" class="audio" id="audios">
+            <i id="mu_audio" class="fas fa-microphone-slash" style="
+            position: absolute; 
+            margin-left: 20%; 
+            font-size: 23px; 
+            margin-top: 23%;"></i>
         </div>
-    </div>
-    <div class="audio_video">
-        <a href="#noscroll" class="audio" id="audios">
-            <i id="mu_audio" class="fas fa-microphone-slash"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -60px;">오디오 관리</span>
-        </a>
-        <a href="#noscroll", class="audio_setting" id="audio_settings">
-            <i class="fas fa-chevron-up"></i>
-        </a>
-        <div class="audio_dropdown-content" id="audio_dropdown" style="position: absolute;">
+        <!--비디오 셋팅-->
+        <div href="#noscroll" class="video" id="videos">
+            <i id="mu_video" class="fas fa-video-slash" style="
+            position: absolute; 
+            margin-left: 22%;
+            font-size: 23px; 
+            margin-top: 23%;"></i>
         </div>
-        <a href="#noscroll" class="video" id="videos">
-            <i id="mu_video" class="fas fa-video-slash"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -60px;">비디오 관리</span>
-        </a>
-        <a href="#noscroll", class="video_setting" id="video_settings">
-            <i class="fas fa-chevron-up"></i>
-        </a>
-        <a href="#noscroll" class="devices_setting" id="devices_settings">
-            <i class="fas fa-chalkboard-teacher"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -53px;">참가자목록</span>
-        </a>
-        <a href="#noscroll" class="user_check" id="user_checks">
-            <i class="fas fa-user-check"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -60px;">전자출석부</span>
-        </a>
-        <a href="#noscroll" class="level" id="levels">
-            <i class="fas fa-window-restore"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -60px;" id="problem_txt">문제지 관리</span>
-        </a>
-        <a href="#noscroll" class="screen" id="screens">
-            <i class="fas fa-caret-square-up"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -53px;">화면 공유</span>
-        </a>
-        <a href="#soscroll" class="user" id="users">
-            <i class="fas fa-users"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -60px;">가상 좌석표</span>
-        </a>
-        <a href="#noscroll" class="list" id="lists">
-            <i class="fas fa-list-alt"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -60px;">난이도 확인</span>
-        </a>
-        <a href="#noscroll" class="fullscreen" id="fullscreens">
-            <i class="fas fa-expand"></i>
-            <span style="position: absolute; font-size: 15px; margin-top: 45px; margin-left: -50px;">전체 화면</span>
-        </a>
-        <div class="btn">
-            <button class="live_btn" id="delect_class">강의실 종료</button>
+        <!--채팅 Q&A-->
+        <div href="#noscroll" class="chatting" id="chatting">
+            <i class="fas fa-comments" style="
+            position: absolute; 
+            margin-left: 23%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--화면공유-->
+        <div href="#noscroll" class="screen" id="screens">
+            <i class="fas fa-caret-square-up" style="
+            position: absolute; 
+            margin-left: 30%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--문제지 관리-->
+        <div href="#noscroll" class="problem" id="levels">
+            <i class="fas fa-window-restore" style="
+            position: absolute; 
+            margin-left: 23%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--자막-->
+        <div href="#noscroll" class="cc" id="cc">
+            <i class="fas fa-closed-captioning" style="
+            position: absolute; 
+            margin-left: 25%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--강의실 종료-->
+        <div href="#noscroll" class="close_class" id="delect_class">
+            <i class="fas fa-phone-slash" style="
+            position: absolute; 
+            margin-left: 20%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
         </div>
     </div>
     <script src="./webrtc_setting/teacher_rtc.js" type="module"></script>

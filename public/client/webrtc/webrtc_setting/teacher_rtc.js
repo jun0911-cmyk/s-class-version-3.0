@@ -17,7 +17,6 @@ import {question_send} from "../questionQueue/question.js";
 const socket = window.io();
 const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
-const attendance = document.getElementById('user_checks');
 const localScreenVideo = document.getElementById('localScreenVideo');
 const my_video = document.getElementById('my_video');
 const my_screen_video = document.getElementById('my_screen_video');
@@ -27,7 +26,7 @@ const screen = document.getElementById('screens');
 const videoSelect = document.getElementById('VideoSelect');
 const problem_book = document.getElementById('levels');
 const seat_ticket = document.getElementById('users');
-const answerSend = document.getElementById('service_chat');
+const chatting = document.getElementById('chatting');
 const audioOutputSelect = document.getElementById('AudioOutputSelect');
 const audioInputSelect = document.getElementById('AudioInputSelect');
 const selectors = [videoSelect, audioInputSelect, audioOutputSelect];
@@ -67,25 +66,17 @@ $(function() {
             // 가상좌석표 생성 함수
             create_seat_table(roomId, user);
 
-            // 화면공유 화면과 가상좌석표 화면 숨김
-            $('#localScreenVideo').hide();
             $('#seat_ticket').hide();
 
             // 오디오 뮤트 함수
             muteAudio.addEventListener('click', audios);
             // 비디오 끄기 함수
             muteVideo.addEventListener('click', videos);
-            // 전자출석부 함수
-            attendance.addEventListener('click', start_attendanceCheck);
             // 문제선택 페이지 함수
             problem_book.addEventListener('click', problem_page);
-            // 가상좌석표 함수
-            seat_ticket.addEventListener('click', set_seat_ticket);
-            // Question Queue 함수
-            answerSend.addEventListener('keypress', function(e) {
-                if (e.key == 'Enter') {
-                    $('#service_chat').val('');
-                }
+            // 질문큐 함수
+            chatting.addEventListener('click', function(e) {
+                window.open("/class/live/room/classroom/10321100&testing&testing/#noscroll","팝업 테스트","width=450, height=800, top=10, left=10");
             });
 
             // 가장좌석표 재갱신 버튼
@@ -190,9 +181,6 @@ $(function() {
                 )
             });
             
-            // 화면 공유
-            my_screen_video.disabled = true;
-            
             // 강의실 생성 완료 이벤트
             socket.emit('created_class', roomId, user);
 
@@ -212,17 +200,6 @@ $(function() {
                     // 화면 공유 P2P 네트워크 연결
                     displayConnectProtocol(DevicesRtcPeerConnection, ScreenSendMessage, ScreenOnMessage);
                 }
-                
-                // 화면 선택 기능
-                my_video.addEventListener('click', () => {
-                    $('#localScreenVideo').hide();
-                    $('#localVideo').show();
-                });
-
-                my_screen_video.addEventListener('click', () => {
-                    $('#localScreenVideo').show();
-                    $('#localVideo').hide();
-                });
             });
 
             // 세션에 사용자 참가 이벤트

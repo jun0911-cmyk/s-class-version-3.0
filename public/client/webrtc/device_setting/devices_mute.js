@@ -6,6 +6,8 @@ class MuteManager {
     }
 
     startAudio() {
+        document.getElementById('audios').style.backgroundColor = '#545454';
+        this.audio.style.backgroundColor = '#545454';
         this.audio.innerHTML = '<i class="fas fa-microphone"></i>';
         this.localStream.getAudioTracks().forEach(function(track) {
             track.enabled = true;
@@ -13,6 +15,8 @@ class MuteManager {
     }
 
     startVideo() {
+        document.getElementById('videos').style.backgroundColor = '#545454';
+        this.video.style.backgroundColor = '#545454';
         this.video.innerHTML = '<i class="fas fa-video"></i>';
         this.localStream.getVideoTracks().forEach(function(track) {
             track.enabled = true;
@@ -20,6 +24,8 @@ class MuteManager {
     }
 
     muteAudio() {
+        document.getElementById('audios').style.backgroundColor = '#ea4435';
+        this.audio.style.backgroundColor = '#ea4435';
         this.audio.innerHTML = '<i class="fas fa-microphone-slash"></i>';
         this.localStream.getAudioTracks().forEach(function(track) {
             track.enabled = false;
@@ -27,6 +33,8 @@ class MuteManager {
     }
 
     enabledVideo() {
+        document.getElementById('videos').style.backgroundColor = '#ea4435';
+        this.video.style.backgroundColor = '#ea4435';
         this.video.innerHTML = '<i class="fas fa-video-slash"></i>';
         this.localStream.getVideoTracks().forEach(function(track) {
             track.enabled = false;

@@ -1,6 +1,6 @@
 var sdpCheck;
 
-export function displayMedia(navigator, localVideo, rtcPeerConnection, my_screen_video, sendMessage, ScreenSendMessage, DevicesRtcPeerConnection, screen) {
+export function displayMedia(navigator, rtcPeerConnection, sendMessage, ScreenSendMessage, DevicesRtcPeerConnection) {
     navigator.mediaDevices.getDisplayMedia({
         video: {
             cursor: "always"
@@ -11,17 +11,11 @@ export function displayMedia(navigator, localVideo, rtcPeerConnection, my_screen
             sampleRate: 44100
         }
     }).then(function(screenStream){
-        localVideo.srcObject = screenStream;
         screenStream.getTracks().forEach(track => rtcPeerConnection.addTrack(track));
-        my_screen_video.disabled = false;
-        screen.disabled = true;
 
         ScreenSendMessage('CONNECT_SCREEN', 1);
 
         screenStream.getVideoTracks()[0].onended = function (track) {
-            my_screen_video.disabled = true;
-            screen.disabled = false;
-            localVideo.srcObject = null;
             ScreenSendMessage('CLOSE_SCREEN', 1);
         }
     }).catch(function(e){
