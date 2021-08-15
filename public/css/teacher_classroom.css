@@ -213,6 +213,7 @@ video {
 select:focus {outline: none;}
 input:focus {outline:none;}
 
+<<<<<<< HEAD
 .seat {
     margin-left: 22%;
     width: 35%;
@@ -257,6 +258,8 @@ input:focus {outline:none;}
     margin-top: -4%;
 }
 
+=======
+>>>>>>> 1da8023837ba9d1046b34707715a35f47de83304
 .audio_video {
     margin-top: -70px;
     margin-left: 0.02%; /* 집 : 455 노트북 : 263 */

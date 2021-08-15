@@ -1,4 +1,8 @@
 node_modules
 package-lock.json
+<<<<<<< HEAD
 package.json
 OAuth_config.json
+=======
+package.json
+>>>>>>> 1da8023837ba9d1046b34707715a35f47de83304
