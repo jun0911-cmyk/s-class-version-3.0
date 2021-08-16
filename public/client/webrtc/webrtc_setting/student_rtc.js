@@ -42,9 +42,13 @@ $(function() {
                 var localVideoClasses = localVideo.classList;
                 var localVideoToggle = localVideoClasses.toggle('fa-tablet');
                 if (localVideoToggle == true) {
-                    $('#chat').hide();
+                    my_localvideo.style.backgroundColor = 'white';
+                    my_localvideo.style.color = '#525252';
+                    localVideo.style.zIndex = '20';
                 } else {
-                    $('#chat').show();
+                    my_localvideo.style.backgroundColor = '#525252';
+                    my_localvideo.style.color = 'white';
+                    localVideo.style.zIndex = '0';
                 }
             }
         
