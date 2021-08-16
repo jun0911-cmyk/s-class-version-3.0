@@ -20,6 +20,9 @@ const remoteVideo = document.getElementById('remoteVideo');
 const muteAudio = document.getElementById('audios');
 const muteVideo = document.getElementById('videos');
 const screen = document.getElementById('screens');
+const attendance_book = document.getElementById('attendance_book');
+const seat = document.getElementById('seat');
+const chatting_toggle = document.getElementById('chatting');
 const videoSelect = document.getElementById('VideoSelect');
 const problem_book = document.getElementById('levels');
 const chatting = document.getElementById('chatting');
@@ -68,13 +71,12 @@ $(function() {
             muteAudio.addEventListener('click', audios);
             // 비디오 끄기 함수
             muteVideo.addEventListener('click', videos);
+            // 전자출석부 함수
+            attendance_book.addEventListener('click', start_attendanceCheck);
+            // 가장좌석표 함수
+            seat.addEventListener('click', set_seat_ticket);
             // 문제선택 페이지 함수
             problem_book.addEventListener('click', problem_page);
-            // 질문큐 함수
-            chatting.addEventListener('click', function(e) {
-                window.open("/class/live/room/classroom/10321100&testing&testing/#noscroll","팝업 테스트","width=450, height=800, top=10, left=10");
-            });
-
             // 가장좌석표 재갱신 버튼
             document.getElementById('seat_button').addEventListener('click', seat_recreate);
 
@@ -114,7 +116,7 @@ $(function() {
 
             function set_seat_ticket() {
                 // 가상 좌석표 toggle 버튼
-                toggle_seat_ticket(seat_ticket);
+                toggle_seat_ticket(seat);
             }
         
             function audios() {
@@ -191,7 +193,7 @@ $(function() {
                     sendMessage('CONNECTION_SCREEN', host);
                     
                     // 화면 공유 함수
-                    displayMedia(navigator, localScreenVideo, DevicesRtcPeerConnection, my_screen_video, sendMessage, ScreenSendMessage, DevicesRtcPeerConnection, screen);
+                    displayMedia(navigator, DevicesRtcPeerConnection, ScreenSendMessage, DevicesRtcPeerConnection, screen);
                     
                     // 화면 공유 P2P 네트워크 연결
                     displayConnectProtocol(DevicesRtcPeerConnection, ScreenSendMessage, ScreenOnMessage);

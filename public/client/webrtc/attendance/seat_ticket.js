@@ -1,7 +1,7 @@
 export function create_seat_table(roomId, user) {
     Vue.component('seat_ticket-component', {
         template: `
-            <div class="seat" style="position: absolute;">
+            <div class="seat_table" style="position: absolute;">
                 <h3 class="seat_text">${roomId} 강의실 가상좌석표</h3>
                 <button class="seat_button" id="seat_button">갱신</button>
                 <div class="seat_user" id="seat_user">
@@ -49,6 +49,8 @@ export function toggle_seat_ticket(seat_ticket) {
     var attendanceCheckData = JSON.parse(sessionStorage.getItem("attendanceCheckData"));
 
     if (seat == true) {
+        seat_ticket.style.color = '#525252';
+        seat_ticket.style.backgroundColor = 'white';
         if (attendanceCheckData == null) {
             Swal.fire(
                 '가상좌석표 오류',
@@ -67,6 +69,8 @@ export function toggle_seat_ticket(seat_ticket) {
             $('#seat_ticket').show();
         }
     } else {
+        seat_ticket.style.color = 'white';
+        seat_ticket.style.backgroundColor = '#525252';
         $('#seat_ticket').hide();
     }
 }

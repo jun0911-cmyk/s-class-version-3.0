@@ -62,7 +62,7 @@
 }
 
 .video_cont {
-    background: black;
+    background: rgba(0, 0, 0, 0.774);
     object-fit : cover;
     width: 300px;
     position: relative;
@@ -76,7 +76,7 @@
     transform: rotateY(180deg); 
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg);
-    background: black;
+    background: rgba(0, 0, 0, 0.774);
     margin-left: 3%;
     margin-top: 1%;
     width: 300px;
@@ -88,12 +88,12 @@
 select:focus {outline: none;}
 input:focus {outline:none;}
 
-.seat {
-    margin-left: 22%;
+.seat_table {
+    margin-left: 29%;
     width: 35%;
     height: 50%;
     background-color: rgb(31, 28, 28);
-    margin-top: 4.8%;
+    margin-top: 8%;
     border-radius: 5px;
 }
 
@@ -133,7 +133,7 @@ input:focus {outline:none;}
 }
 
 .class_setting_icon {
-    margin-left: -5%;
+    margin-left: -10%;
     margin-top: 23%;
 }
 
@@ -146,7 +146,7 @@ input:focus {outline:none;}
     display: flex;
     flex-wrap: wrap;
     color: white;
-    margin-left: 35%;
+    margin-left: 30%;
     margin-top: 36%;
     gap: 0 40px;
 }
@@ -177,7 +177,7 @@ input:focus {outline:none;}
     border-radius: 50%;
 }
 
-.chatting {
+.screen {
     font-family: 'Apple SD Gothic Neo';
     position: absolute;
     width: 2.5%;
@@ -190,14 +190,38 @@ input:focus {outline:none;}
     border-radius: 50%;
 }
 
-.screen {
+.cc {
     font-family: 'Apple SD Gothic Neo';
     position: absolute;
     width: 2.5%;
     height: 5%;
     font-size: 30px;
     margin-top: 10%;
-    margin-left: 52.4%;
+    margin-left: 52.8%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.attendance_book {
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 57.2%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.seat {
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 61.4%;
     color: white;
     background-color: #545454;
     border-radius: 50%;
@@ -210,20 +234,7 @@ input:focus {outline:none;}
     height: 5%;
     font-size: 30px;
     margin-top: 10%;
-    margin-left: 56.3%;
-    color: white;
-    background-color: #545454;
-    border-radius: 50%;
-}
-
-.cc {
-    font-family: 'Apple SD Gothic Neo';
-    position: absolute;
-    width: 2.5%;
-    height: 5%;
-    font-size: 30px;
-    margin-top: 10%;
-    margin-left: 60.3%;
+    margin-left: 65.6%;
     color: white;
     background-color: #545454;
     border-radius: 50%;
@@ -236,7 +247,7 @@ input:focus {outline:none;}
     height: 5%;
     font-size: 30px;
     margin-top: 10%;
-    margin-left: 67%;
+    margin-left: 70%;
     color: white;
     background-color: #ea4435;
     border-radius: 50%;
@@ -255,7 +266,7 @@ input:focus {outline:none;}
     border-radius: 50%;
 }
 
-.users_list {
+.chatting {
     font-family: 'Apple SD Gothic Neo';
     position: absolute;
     width: 2.5%;
@@ -268,7 +279,20 @@ input:focus {outline:none;}
     border-radius: 50%;
 }
 
-.chatting:hover, .screen:hover, .problem:hover, .cc:hover, .class_info:hover, .users_list:hover {
+.users_list {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 104.7%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.attendance_book:hover, .screen:hover, .problem:hover, .cc:hover, .seat:hover, .class_info:hover, .chatting:hover, .users_list:hover {
     background-color: #403f3d;
 }
 
@@ -283,7 +307,7 @@ input:focus {outline:none;}
     -webkit-user-select: none;
     user-select: none;
     position: absolute;
-    margin-left: 27.5%;
+    margin-left: 30.6%;
 }
 
 .class_info_text {
@@ -390,4 +414,53 @@ div {
     border: none;
     background-color: #403f3d;
     color: white;
+}
+
+.chat {
+    position: absolute;
+    width: 20%;
+    height: 87%;
+    margin-left: 79%;
+    margin-top: -10.8%;
+    background-color: rgba(0, 0, 0, 0.774);
+    border-radius: 30px;
+}
+
+.chat_title {
+    position: absolute;
+    margin-left: 37%;
+    margin-top: 2%;
+    font-weight: 900;
+    color: white;
+    font-size: 20px;
+}
+
+.select_user {
+    position: absolute;
+    margin-left: 3.5%;
+    margin-top: 183%;
+}
+
+.select {
+    background-color: #202124;
+    color: white;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+
+.input_chat {
+    position: absolute;
+    margin-left: 3.5%;
+    margin-top: 195%;
+}
+
+.input {
+    border-radius: 5px;
+    background-color: #202124;
+    outline: none;
+    border: none;
+    color: white;
+    height: 50px;
+    font-size: 17px;
 }

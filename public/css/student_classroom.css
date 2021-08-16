@@ -61,259 +61,188 @@
 @media only screen and (max-width : 320px) {
 }
 
-.loading {
-    position: absolute;
-    border:0;
-    background-color: #16eee3ad;
-    padding:0px;
-    margin-top: 300px;
-    width: 30%;
-    height: 30%;
-    margin-left: 35%;
-    border-radius: 10px;
+.video_cont {
+    background: rgba(0, 0, 0, 0.774);
+    object-fit : cover;
+    width: 300px;
+    position: relative;
+    margin-left: 3.5%;
+    margin-top: 1%;
+    top: 39px;
+    border-radius: 30px 0 10px 0;
+    height: 200px;
     z-index: 99;
 }
 
-.text {
-    text-align: center;
-    font-size: xx-large;
-    font-weight: 600;
-    padding: 50px;
-}
-    
-.spin {
-    margin-left: 255px;
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    border:dashed 5px rgb(87, 80, 80);
-    animation-name: spin;
-    animation-duration: 1.2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-    
-@keyframes spin {
-    from   {  -webkit-transform: rotate(0deg); }
-    to   {  -webkit-transform: rotate(360deg); }
-}
-
-.class_room_content {
-    position: absolute;
-    width: 10%;
-    height: 3.64%;
-    border: 1px solid black;
-    border-radius: 15px 15px 0 0;
-    background-color: #222222;
-    color: white;
-    margin-top: -15.6%;
-}
-
-.class_room_text {
-    text-align: center;
-    margin-top: 3%;
-    margin-left: -1%; 
-}
-
-.class_room_content:hover {
-    cursor: pointer;
-    background-color: #473030;
-    border: 1px solid #473030;
-}
-
-.user_content {
-    position: absolute;
-    width: 10%;
-    height: 3.64%;
-    border: 1px solid black;
-    border-radius: 15px 15px 0 0;
-    background-color: #222222;
-    margin-top: -15.6%;
-    margin-left: 10%;
-    color: white;
-}
-
-.user_text {
-    text-align: center;
-    margin-top: 3%;
-    margin-left: -1%; 
-}
-
-.user_content:hover {
-    cursor: pointer;
-    background-color: #473030;
-    border: 1px solid #473030;
-}
-
-.problem_page_content {
-    position: absolute;
-    width: 10%;
-    height: 3.64%;
-    border: 1px solid black;
-    border-radius: 15px 15px 0 0;
-    background-color: #222222;
-    margin-top: -15.6%;
-    margin-left: 20%;
-    color: white;
-}
-
-.problem_page_text {
-    text-align: center;
-    margin-top: 3%;
-    margin-left: -1%; 
-}
-
-.problem_page_content:hover {
-    cursor: pointer;
-    background-color: #473030;
-    border: 1px solid #473030;
-}
-
-.live_context {
-    font-family: 'Cafe24Ohsquare';
-    margin-top: -13.5%;
-    left: 32%;
-    color: #0d1117;
-    position: absolute;
-    z-index: 50;
-}
-
-.live {
-    margin-left: -68%;
-    position: absolute;
-}
-
-.live_vue {
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    margin-left: -70.6%;
-    margin-top: 3.5px;
-    background: rgba(255, 0, 0, 0.87);
-    border-radius: 50%;
-    -webkit-animation:blink 1.5s ease-in-out infinite alternate; -moz-animation:blink 1.5s ease-in-out infinite alternate; animation:blink 1.5s ease-in-out infinite alternate;
-    position: absolute;
-    z-index: 50;
-}
-
-.video_cont {
-    border-radius: 48px 0 0 0;
-}
-
-video {
-    background: #222;
-    object-fit : cover;
-    width: 450px;
-    position: relative;
-    margin-left: 76.54%;
-    height: 300px;
-}
-
 .remote_video_cont {
-    margin-left: -100%;
-    margin-top: 2.06%;
-    width: 1470px;
-    height: 827px;
+    transform: rotateY(180deg); 
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    background: rgba(0, 0, 0, 0.774);
+    margin-left: -16%;
+    margin-top: 3%;
+    width: 1400px;
     position: absolute;
-    z-index: 30;
-}
-
-.user_chat {
-    width: 450px;
-    height: 637px;
-    border: 3px solid black;
-    margin-left: 76.54%;
-    margin-top: -6px;
-}
-
-.chat_title {
-    position: absolute;
-    font-weight: 600;
-    font-size: 20px;
-    color: black;
-    margin-left: 195px;
-    margin-top: 10px;
-}
-
-.chat_msg {
-    position: absolute;
-    margin-top: 540px;
-    margin-left: 20px;
-}
-
-.chat_content {
-    border-radius: 10px;
-    background-color: #f7f2f2;
-}
-
-.file_select {
-    position: absolute;
-    margin-top: 545px;
-    margin-left: 300px;
-}
-
-.file_content {
-    margin-left: 5px;
-}
-
-.service_chat {
-    border-style: none;
-    margin-left: 20px; 
-    margin-top: 580px;
-    background-color: #f7f2f2;
-    border: none;
+    height: 780px;
+    border-radius: 30px;
 }
 
 select:focus {outline: none;}
 input:focus {outline:none;}
 
-.audio_video {
-    margin-top: -70px;
-    margin-left: 0.02%; /* 집 : 455 노트북 : 263 */
-    width: 1470px;
-    height: 70px;
-    background: rgb(31, 28, 28);
+.class_setting_icon {
+    margin-left: -9%;
+    margin-top: 23%;
+}
+
+.class_setting_text {
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    margin-left: 31%;
+    margin-top: 36%;
+    gap: 0 40px;
 }
 
 .audio {
-    font-size: 30px;
-    color: #bbacac;
-    margin-left: 30px;
-}
-
-.audio_setting {
+    font-family: 'Apple SD Gothic Neo';
     position: absolute;
-    font-size: 12px;
-    color: #bbacac;
-    margin-top: 10px;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 40%;
+    color: white;
+    background-color: #ea4435;
+    border-radius: 50%;
 }
 
 .video {
-    font-size: 30px;
-    color: #bbacac;
-    margin-left: 50px;
-}
-
-.video_setting {
+    font-family: 'Apple SD Gothic Neo';
     position: absolute;
-    font-size: 12px;
-    color: #bbacac;
-    margin-top: 10px;
-    margin-left: 5px;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 44.2%;
+    color: white;
+    background-color: #ea4435;
+    border-radius: 50%;
 }
 
-.live_btn {
-    font-size: 17px;
-    font-weight: 600;
+.screen {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 48.5%;
     color: white;
-    background-color: rgba(255, 0, 0, 0.87);
-    border: 1px solid rgba(255, 0, 0, 0.87); 
-    width: 100px;
-    height: 30px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    margin-top: 13px;
-    margin-right: -2440px;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.cc {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 52.8%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.leave_class {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 57.5%;
+    color: white;
+    background-color: #ea4435;
+    border-radius: 50%;
+}
+
+.class_info {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 92.4%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.my_localvideo {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 96.5%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.users_list {
+    font-family: 'Apple SD Gothic Neo';
+    position: absolute;
+    width: 2.5%;
+    height: 5%;
+    font-size: 30px;
+    margin-top: 10%;
+    margin-left: 100.6%;
+    color: white;
+    background-color: #545454;
+    border-radius: 50%;
+}
+
+.screen:hover, .cc:hover, .seat:hover, .class_info:hover, .my_localvideo:hover, .users_list:hover {
+    background-color: #403f3d;
+}
+
+.leave_class:hover {
+    background-color: red;
+}
+
+.leave_class_text {
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    position: absolute;
+    margin-left: 17.6%;
+}
+
+.class_info_text {
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    margin-left: 53%;
+    gap: 0 40px;
 }
 
 body {
@@ -350,17 +279,16 @@ div {
 }
 
 .dropdown-content {
-    margin-left: 500px;
+    margin-left: 970px;
+    margin-top: 335px;
     font-weight: 500;
     display: block;
     position: absolute;
     background-color: #403f3d;
     color: white;
-    text-align: left;
     min-width: 355px;
     border-radius: 7px;
     padding-left: 16px;
-    display: block;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -383,34 +311,51 @@ div {
     color: red;
 }
 
-@-webkit-keyframes blink { 
-    0% {
-        opacity:0;
-    } 
-    30% {
-        opacity:1;
-    } 
-    100% {
-        opacity:1;
-    } 
-} @-moz-keyframes blink {
-    0% {
-        opacity:0;
-    } 
-    30% {
-        opacity:1;
-    } 
-    100% {
-        opacity:1;
-    } 
-} @keyframes blink { 
-    0% {
-        opacity:0;
-    } 
-    30% {
-        opacity:1;
-    } 
-    100% {
-        opacity:1;
-    } 
+.chat {
+    position: absolute;
+    width: 20%;
+    height: 83.7%;
+    margin-left: 79%;
+    margin-top: -8.8%;
+    background-color: rgba(0, 0, 0, 0.774);
+    border-radius: 30px;
+}
+
+.chat_title {
+    position: absolute;
+    margin-left: 37%;
+    margin-top: 2%;
+    font-weight: 900;
+    color: white;
+    font-size: 20px;
+}
+
+.select_user {
+    position: absolute;
+    margin-left: 3.5%;
+    margin-top: 173%;
+}
+
+.select {
+    background-color: #202124;
+    color: white;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+
+.input_chat {
+    position: absolute;
+    margin-left: 3.5%;
+    margin-top: 185%;
+}
+
+.input {
+    border-radius: 5px;
+    background-color: #202124;
+    outline: none;
+    border: none;
+    color: white;
+    height: 50px;
+    font-size: 17px;
 }

@@ -24,12 +24,24 @@
     <div id="root"></div>
     <video id="localVideo" class="video_cont" playsinline autoplay muted></video>
     <video id="remoteVideo" class="remote_video_cont" playsinline autoplay></video>
-    <div class="seat_ticket" id="seat_ticket">
-        <seat_ticket-component></seat_ticket-component>
-    </div>
     <div class="dropdown">
         <div class="dropdown-content" id="dropdown">
         </div>
+    </div>
+    <div class="chat" id="chat">
+        <span class="chat_title">참가자 채팅</span>
+        <div class="select_user">
+            <select class="select">
+                <option>모두</option>
+                <option>호스트</option>
+            </select>
+        </div>
+        <div class="input_chat">
+            <input class="input" type="text" placeholder="여기에 채팅을 입력해주세요..." size="35">
+        </div>
+    </div>
+    <div class="seat_ticket" id="seat_ticket">
+        <seat_ticket-component></seat_ticket-component>
     </div>
     <div class="class_setting_icon">
         <!--오디오 셋팅-->
@@ -48,19 +60,27 @@
             font-size: 23px; 
             margin-top: 23%;"></i>
         </div>
-        <!--채팅 Q&A-->
-        <div href="#noscroll" class="chatting" id="chatting">
-            <i class="fas fa-comments" style="
-            position: absolute; 
-            margin-left: 23%; 
-            font-size: 23px;
-            margin-top: 23%;"></i>
-        </div>
         <!--화면공유-->
         <div href="#noscroll" class="screen" id="screens">
             <i class="fas fa-caret-square-up" style="
             position: absolute; 
-            margin-left: 30%; 
+            margin-left: 28%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--전자출석부-->
+        <div href="#noscroll" class="attendance_book" id="attendance_book">
+            <i class="fas fa-book-reader" style="
+            position: absolute; 
+            margin-left: 25%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--가상좌석표-->
+        <div href="#noscroll" class="seat" id="seat">
+            <i class="fas fa-user-check" style="
+            position: absolute; 
+            margin-left: 23%; 
             font-size: 23px;
             margin-top: 23%;"></i>
         </div>
@@ -104,19 +124,29 @@
             font-size: 23px;
             margin-top: 23%;"></i>
         </div>
+        <!--채팅 Q&A-->
+        <div href="#noscroll" class="chatting" id="chatting">
+            <i class="fas fa-comments" style="
+            position: absolute; 
+            margin-left: 23%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
     </div>
     <div class="class_setting_text">
         <span>오디오</span>
         <span>비디오</span>
-        <span>채팅창</span>
-        <span>화면</span>
+        <span>스크린</span>
+        <span>자막표</span>
+        <span>출석부</span>
+        <span>좌석표</span>
         <span>문제집</span>
-        <span>자막</span>
         <div class="close_class_text">
             <span>종료</span>
         </div>
         <div class="class_info_text">
             <span>정보</span>
+            <span>채팅창</span>
             <span>참가자</span>
         </div>
     </div>

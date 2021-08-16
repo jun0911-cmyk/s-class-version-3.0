@@ -1,3 +1,5 @@
+const ipfilter = require('express-ipfilter').IpFilter;
+const IpDeniedError = require('express-ipfilter').IpDeniedError;
 const express = require('express');
 const requestIp = require('request-ip');
 const logger = require('morgan');
@@ -10,6 +12,7 @@ const fs = require('fs');
 
 const port = process.env.PORT || 8000;
 const app = express();
+const ips = ['::ffff:192.168.35.1', '::ffff:118.34.145.154'];
 const credentials = {
     key: fs.readFileSync('./cert.key'),
     cert: fs.readFileSync('./cert.crt'),
@@ -19,6 +22,7 @@ const io = require('socket.io')(server);
 
 app.use(logger('dev'));
 
+app.use(ipfilter(ips, {mode: 'allow'}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('views', __dirname + '/');
@@ -39,6 +43,13 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(err, req, res, _next) {
+    if (err instanceof IpDeniedError){
+        res.status(401).end();
+    } else{
+        res.status(err.status || 500).end();
+    }
+});
 
 // OAuth
 require('./OAuth/OAuth_singup')(app, crypto);

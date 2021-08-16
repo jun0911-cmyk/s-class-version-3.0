@@ -12,7 +12,7 @@ const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
 const muteAudio = document.getElementById('audios');
 const muteVideo = document.getElementById('videos');
-const questionSend = document.getElementById('service_chat');
+const my_localvideo = document.getElementById('my_localvideo');
 const rtcPeerConnection = new RTCPeerConnection({
     iceServers: [{
         urls: 'stun:stun.l.google.com:19302'
@@ -36,12 +36,17 @@ $(function() {
 
             muteAudio.addEventListener('click', audios);
             muteVideo.addEventListener('click', videos);
-            questionSend.addEventListener('keypress', function(e) {
-                if (e.key == 'Enter') {
-                    socket.emit('send_Question', roomId, $('#service_chat').val(), user);
-                    $('#service_chat').val('');
+            my_localvideo.addEventListener('click', toggle_video);
+
+            function toggle_video() {
+                var localVideoClasses = localVideo.classList;
+                var localVideoToggle = localVideoClasses.toggle('fa-tablet');
+                if (localVideoToggle == true) {
+                    $('#chat').hide();
+                } else {
+                    $('#chat').show();
                 }
-            });
+            }
         
             function audios() {
                 mute_audio(localVideo, localStream);

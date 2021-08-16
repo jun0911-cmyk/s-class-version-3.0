@@ -4,7 +4,7 @@ export function host_leave_class(socket, remoteVideo) {
 }
 
 export function leave_call(socket, roomId, user) {
-    document.getElementById('exit_class').addEventListener('click', e => {
+    document.getElementById('leave_class').addEventListener('click', e => {
         Swal.fire({
             title: `정말로 ${roomId}번 강의실을 나가시겠습니까?`,
             text: "강의실을 나가시려면 나가기를 클릭해주세요.",

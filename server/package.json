@@ -21,6 +21,7 @@
     "electron": "^13.1.7",
     "events": "^3.3.0",
     "express": "^4.17.1",
+    "express-ipfilter": "^1.2.0",
     "express-session": "^1.17.1",
     "http": "0.0.1-security",
     "https": "^1.0.0",
