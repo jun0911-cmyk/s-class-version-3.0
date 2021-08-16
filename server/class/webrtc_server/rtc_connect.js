@@ -38,9 +38,14 @@ module.exports = function(app, io, server) {
                     user_id: roomId
                 }
             }).then(function(teacherData) {
-                
-            })
-            res.json({ user: req.user, roomid: roomId });
+                models.class.findOne({
+                    where: {
+                        class_host: teacherData.email
+                    }
+                }).then(function(classData) {
+                    res.json({ user: req.user, roomid: roomId, host: teacherData, class: classData });
+                })
+            });
         }
     });
 }

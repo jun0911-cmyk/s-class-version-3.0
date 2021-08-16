@@ -24,15 +24,14 @@
     <div id="root"></div>
     <video id="localVideo" class="video_cont" playsinline autoplay muted></video>
     <video id="remoteVideo" class="remote_video_cont" playsinline autoplay></video>
-    <!--<div class="mute">
-        <i id="slash_audio" class="fas fa-microphone-slash" style="color: red; margin-right: 5px"></i>
-        <i id="slash_video" class="fas fa-video-slash" style="color: red; margin-right: 10px"></i>
-        <span class="client_status" id="class_status" style="margin-left: auto;">jkw080305@naver.com</span>
-    </div>!-->
     <div class="seat_ticket" id="seat_ticket">
         <seat_ticket-component></seat_ticket-component>
     </div>
-    <div class="class_setting">
+    <div class="dropdown">
+        <div class="dropdown-content" id="dropdown">
+        </div>
+    </div>
+    <div class="class_setting_icon">
         <!--오디오 셋팅-->
         <div href="#noscroll" class="audio" id="audios">
             <i id="mu_audio" class="fas fa-microphone-slash" style="
@@ -88,6 +87,37 @@
             margin-left: 20%; 
             font-size: 23px;
             margin-top: 23%;"></i>
+        </div>
+        <!--강의실 정보-->
+        <div href="#noscroll" class="class_info" id="class_info">
+            <i class="fas fa-info-circle" style="
+            position: absolute; 
+            margin-left: 25%; 
+            font-size: 25px;
+            margin-top: 23%;"></i>
+        </div>
+        <!--참가자 목록-->
+        <div href="#noscroll" class="users_list">
+            <i class="fas fa-users" style="
+            position: absolute; 
+            margin-left: 20%; 
+            font-size: 23px;
+            margin-top: 23%;"></i>
+        </div>
+    </div>
+    <div class="class_setting_text">
+        <span>오디오</span>
+        <span>비디오</span>
+        <span>채팅창</span>
+        <span>화면</span>
+        <span>문제집</span>
+        <span>자막</span>
+        <div class="close_class_text">
+            <span>종료</span>
+        </div>
+        <div class="class_info_text">
+            <span>정보</span>
+            <span>참가자</span>
         </div>
     </div>
     <script src="./webrtc_setting/teacher_rtc.js" type="module"></script>

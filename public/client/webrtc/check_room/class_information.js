@@ -1,5 +1,4 @@
-const information = document.querySelector('#information');
-const click_information = document.querySelector('#click_information');
+const information = document.querySelector('#class_info');
 const socket = window.io();
 
 $(function() {
@@ -12,10 +11,12 @@ $(function() {
         success: function(result) {
             var user = result.user;
             var roomId = result.roomid;
+            var host = result.host;
+            var classroom = result.class;
 
             var calases = information.classList;
 
-            click_information.addEventListener("click", () => {
+            information.addEventListener("click", () => {
                 var push = calases.toggle('fa-info-circle');
                 if(push == true) {
                     document.getElementById('dropdown').innerHTML = `
@@ -23,13 +24,13 @@ $(function() {
                         font-size: 25px;
                         margin-top: 10px;
                         margin-left: 305px"></i>
-                        <h2 class="title">${classRoomName}</h2>
+                        <h2 class="title">${classroom.class_name}</h2>
                         </br>
                         <span>강의실 ID : ${roomId}</span>
                         </br></br>
-                        <span>강의자 : ${classRoomTeacher}</span>
+                        <span>강의자 : ${host.email}</span>
                         </br></br>
-                        <span>학생 이메일 : ${user.email}</span>
+                        <span>참가자 이메일 : ${user.email}</span>
                         </br></br>
                         <span style="font-size: 15px;">데이터 정보 : ${user.email} 님은 대한민국의 </br>데이터 센터에 정보가 연결되어 있습니다.</span>
                         </br>
