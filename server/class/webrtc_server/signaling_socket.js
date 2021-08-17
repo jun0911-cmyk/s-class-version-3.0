@@ -71,39 +71,6 @@ module.exports = function(app, io) {
             }
         }
 
-        function delectInvite(Email, user) {
-            models.User.findOne({
-                where: { 
-                    email: Email
-                }
-            }).then(function(delectUser) {
-                const delectsplit = delectUser.select_teacher.split(", ");
-                if (delectsplit.length == 1) {
-                    models.User.update({
-                        select_teacher: 'not teacher'
-                    }, {
-                        where: {
-                            email: Email
-                        }
-                    })
-                    .catch(err => console.log(err));
-                } else if (delectsplit.length != 1) {
-                    for (var i = 0; i < delectsplit.length; i++) {
-                        if (delectsplit[i] != user.email) {
-                            models.User.update({
-                                select_teacher: delectsplit[i]
-                            }, {
-                                where: {
-                                    email: Email
-                                }
-                            })
-                            .catch(err => console.log(err));
-                        }
-                    }
-                }
-            });
-        }
-
         socket.on('message', function(message) {
             socket.broadcast.emit('message', message);
         });
