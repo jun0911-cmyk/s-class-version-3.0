@@ -3,6 +3,7 @@ const app = express();
 const server = require('http').createServer(app);
 const models = require('../../database_db/models');
 const { QueryTypes } = require('sequelize');
+const event = require('./events');
 const io = require('socket.io')(server);
 
 var clients;

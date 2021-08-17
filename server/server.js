@@ -68,7 +68,7 @@ require('./class/teacher_invite')(app);
 // WebRTC
 require('./class/webrtc_server/rtc_connect')(app, io, server);
 require('./class/webrtc_server/check_room')(app, io, server);
-require('./class/webrtc_server/signaling_socket')(app, io);
+require('./class/webrtc_server/socket_event')(app, io);
 require('./class/webrtc_server/screen_server')(app, io, server); 
 require('./class/webrtc_server/devices_setting')(app, io, server);
 
